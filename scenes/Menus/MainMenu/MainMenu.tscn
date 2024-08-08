@@ -8,3 +8,6 @@
 game_scene_path = "res://scenes/GameScene/GameUI.tscn"
 options_packed_scene = ExtResource("2_vyo1v")
 credits_packed_scene = ExtResource("3_xc6r2")
+
+[node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
+text = "The Game"
