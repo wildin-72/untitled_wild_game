@@ -31,7 +31,7 @@ jobs:
       - name: Upload to itch.io
         uses: dulvui/itchio-butler-upload@v0.0.1
         with:
-            working-directory: '"build/untitled_wild_game"'
+            working-directory: '/home/runner/work/untitled_wild_game/untitled_wild_game/build'
             api-key: ${{ secrets.BUTLER_CREDENTIALS }}
             user: phorpho
             game: untitled-wild-game
