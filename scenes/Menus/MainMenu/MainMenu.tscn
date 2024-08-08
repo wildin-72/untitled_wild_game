@@ -11,3 +11,6 @@ credits_packed_scene = ExtResource("3_xc6r2")
 
 [node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
 text = "The Game"
+
+[node name="SubTitle" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="1"]
+text = "Why isn't this working?"
