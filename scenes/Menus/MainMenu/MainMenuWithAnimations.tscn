@@ -368,6 +368,7 @@ modulate = Color(1, 1, 1, 0)
 
 [node name="SubTitle" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="1"]
 modulate = Color(1, 1, 1, 0)
+text = "THIS IS WORKING!!"
 
 [node name="MenuButtons" parent="MenuContainer/VBoxContainer/MenuMargin" index="0"]
 modulate = Color(1, 1, 1, 0)
