@@ -1,0 +1,101 @@
+[gd_scene load_steps=14 format=3 uid="uid://csfw25lac81x1"]
+
+[ext_resource type="Script" path="res://entities/Player/player.gd" id="1_d4p6m"]
+[ext_resource type="Texture2D" uid="uid://ctpq0wqq86qs6" path="res://icon.png" id="1_xjgi2"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="3_5mkto"]
+[ext_resource type="Script" path="res://components/hurtbox.gd" id="4_x8v33"]
+[ext_resource type="Script" path="res://components/health.gd" id="5_62q20"]
+[ext_resource type="Script" path="res://components/statemachine.gd" id="6_jabk4"]
+[ext_resource type="Script" path="res://entities/Player/player_move_state.gd" id="7_sv7fj"]
+
+[sub_resource type="Animation" id="Animation_3jn3w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_o74dv"]
+resource_name = "attack1"
+length = 0.50001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, false, false, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_olu7p"]
+_data = {
+"RESET": SubResource("Animation_3jn3w"),
+"attack1": SubResource("Animation_o74dv")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xp6np"]
+height = 42.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_se0lq"]
+radius = 29.0
+height = 58.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t5e8"]
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_d4p6m")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("1_xjgi2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_olu7p")
+}
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("3_5mkto")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(40, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xp6np")
+disabled = true
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("4_x8v33")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_se0lq")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("5_62q20")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_2t5e8")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_jabk4")
+initial_state = NodePath("PlayerMoveState")
+
+[node name="PlayerMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "sprite", "hitbox")]
+script = ExtResource("7_sv7fj")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+sprite = NodePath("../../Icon")
+hitbox = NodePath("../../Hitbox/CollisionShape2D")

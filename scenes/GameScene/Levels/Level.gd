@@ -8,3 +8,4 @@ func _on_lose_button_pressed():
 
 func _on_win_button_pressed():
 	emit_signal("level_won")
+

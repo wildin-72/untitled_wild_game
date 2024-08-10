@@ -4,7 +4,97 @@
 [ext_resource type="Texture2D" uid="uid://c1eqf1cse1hch" path="res://addons/maaacks_game_template/base/assets/images/addition_symbol.png" id="2_dw35t"]
 [ext_resource type="Script" path="res://addons/maaacks_game_template/base/scripts/CaptureFocus.gd" id="2_wft4x"]
 [ext_resource type="Texture2D" uid="uid://bteq3ica74h30" path="res://addons/maaacks_game_template/base/assets/images/subtraction_symbol.png" id="3_lngdd"]
-[ext_resource type="Script" path="res://addons/maaacks_game_template/base/scenes/Menus/OptionsMenu/Input/KeyAssignmentDialog.gd" id="3_wsh2h"]
+
+[sub_resource type="GDScript" id="GDScript_y58wa"]
+script/source = "extends ConfirmationDialog
+
+const LISTENING_TEXT : String = \"Listening for input...\"
+const FOCUS_HERE_TEXT : String = \"Focus here to assign inputs.\"
+const CONFIRM_INPUT_TEXT : String = \"Press again to confirm...\"
+const NO_INPUT_TEXT : String = \"None\"
+
+var last_input_event : InputEvent
+var last_input_text : String
+var listening : bool = false
+var confirming : bool = false
+
+func _record_input_event(event : InputEvent):
+	last_input_text = InputEventHelper.get_text(event)
+	if last_input_text.is_empty():
+		return
+	last_input_event = event
+	%InputLabel.text = last_input_text
+	get_ok_button().disabled = false
+
+func _is_recordable_input(event : InputEvent):
+	return event != null and \\
+		(event is InputEventKey or \\
+		event is InputEventMouseButton or \\
+		event is InputEventJoypadButton or \\
+		(event is InputEventJoypadMotion and \\
+		abs(event.axis_value) > 0.5)) and \\
+		event.is_pressed()
+
+func _start_listening():
+	%InputTextEdit.placeholder_text = LISTENING_TEXT
+	listening = true
+	%DelayTimer.start()
+
+func _stop_listening():
+	%InputTextEdit.placeholder_text = FOCUS_HERE_TEXT
+	listening = false
+	confirming = false
+
+func _on_text_edit_focus_entered():
+	_start_listening.call_deferred()
+
+func _on_input_text_edit_focus_exited():
+	_stop_listening()
+
+func _focus_on_ok():
+	get_ok_button().grab_focus()
+
+func _ready():
+	get_ok_button().focus_neighbor_top = ^\"../../%InputTextEdit\"
+	get_cancel_button().focus_neighbor_top = ^\"../../%InputTextEdit\"
+
+func _input_matches_last(event : InputEvent) -> bool:
+	return last_input_text == InputEventHelper.get_text(event)
+
+func _is_mouse_input(event : InputEvent) -> bool:
+	return event is InputEventMouse
+
+func _input_confirms_choice(event : InputEvent) -> bool:
+	return confirming and not _is_mouse_input(event) and _input_matches_last(event)
+
+func _should_process_input_event(event : InputEvent) -> bool:
+	return listening and _is_recordable_input(event) and %DelayTimer.is_stopped()
+
+func _should_confirm_input_event(event : InputEvent) -> bool:
+	return not _is_mouse_input(event)
+
+func _process_input_event(event : InputEvent):
+	if not _should_process_input_event(event):
+		return
+	if _input_confirms_choice(event):
+		confirming = false
+		_focus_on_ok.call_deferred()
+		return
+	_record_input_event(event)
+	if _should_confirm_input_event(event):
+		confirming = true
+		%DelayTimer.start()
+		%InputTextEdit.placeholder_text = CONFIRM_INPUT_TEXT
+
+func _on_input_text_edit_gui_input(event):
+	%InputTextEdit.set_deferred(\"text\", \"\")
+	_process_input_event(event)
+
+func _on_visibility_changed():
+	if visible:
+		%InputLabel.text = NO_INPUT_TEXT
+		%InputTextEdit.grab_focus()
+"
 
 [node name="Controls" type="MarginContainer"]
 anchors_preset = 15
@@ -56,7 +146,7 @@ dialog_text = "
 
 
 "
-script = ExtResource("3_wsh2h")
+script = SubResource("GDScript_y58wa")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="KeyAssignmentDialog"]
 anchors_preset = 15
