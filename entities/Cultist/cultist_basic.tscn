@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjbftd2fi2yxu"]
+
+[ext_resource type="Script" path="res://entities/Cultist/cultist_basic.gd" id="1_4y5fg"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_muqn0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bq6n0"]
+
+[node name="CultistBasic" type="Area2D" groups=["Cultist"]]
+script = ExtResource("1_4y5fg")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(20, 15)
+mesh = SubResource("CapsuleMesh_muqn0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_bq6n0")

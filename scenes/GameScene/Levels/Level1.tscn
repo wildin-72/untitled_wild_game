@@ -1,38 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddpk0huy16ddb"]
+[gd_scene load_steps=3 format=3 uid="uid://ddpk0huy16ddb"]
 
-[ext_resource type="Script" path="res://scenes/GameScene/Levels/Level.gd" id="1_cwv6b"]
+[ext_resource type="Script" path="res://scenes/GameScene/Levels/Level1.gd" id="1_duhb4"]
+[ext_resource type="PackedScene" uid="uid://cjbftd2fi2yxu" path="res://entities/Cultist/cultist_basic.tscn" id="2_ynpk8"]
 
-[node name="Level1" type="HBoxContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_cwv6b")
+[node name="Level1" type="Node"]
+script = ExtResource("1_duhb4")
+cultist_scene = ExtResource("2_ynpk8")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="LoseButton" type="Button" parent="MarginContainer"]
-layout_mode = 2
-text = "Lose"
-
-[node name="MarginContainer2" type="MarginContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="WinButton" type="Button" parent="MarginContainer2"]
-layout_mode = 2
-text = "Win"
-
-[connection signal="pressed" from="MarginContainer/LoseButton" to="." method="_on_lose_button_pressed"]
-[connection signal="pressed" from="MarginContainer2/WinButton" to="." method="_on_win_button_pressed"]
+[node name="CultistPosition" type="Marker2D" parent="."]
+position = Vector2(1142, 363)
