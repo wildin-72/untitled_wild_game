@@ -8,6 +8,21 @@
 [ext_resource type="Script" path="res://components/statemachine.gd" id="6_jabk4"]
 [ext_resource type="Script" path="res://entities/Player/player_move_state.gd" id="7_sv7fj"]
 
+[sub_resource type="Animation" id="Animation_3jn3w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_o74dv"]
 resource_name = "attack1"
 length = 0.50001
@@ -22,21 +37,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, true, false, false, false, true]
-}
-
-[sub_resource type="Animation" id="Animation_3jn3w"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_olu7p"]
@@ -54,7 +54,7 @@ height = 58.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t5e8"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_d4p6m")
 
 [node name="Icon" type="Sprite2D" parent="."]
