@@ -7,11 +7,19 @@ const JUMP_VELOCITY = -400.0
 @onready var sprite = $Icon
 @onready var hitbox = $Hitbox/CollisionShape2D
 
+@export var flipped: bool = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 
 
 
 
-func _unhandled_input(event):
-	if event.is_action_pressed("attack1"):
-		animator.play("attack1")
+
+
+
+
+func _on_player_move_state_flipped():
+	flipped = true
+
+
+func _on_player_move_state_unflipped():
+	flipped = false
