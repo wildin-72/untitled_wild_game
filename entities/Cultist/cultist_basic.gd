@@ -3,6 +3,8 @@ extends CharacterBody2D
 # This will be changed to whatever the player actually is
 @onready var player = get_tree().get_nodes_in_group("Player")[0]
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var _animation_player = $Sprite2D/AnimationPlayer
+#@onready var hitbox: CollisionShape2D = $Hitbox/CollisionShape2D
 
 var movement_speed: float = 60.0
 var distance_in_front_of_player: float = 200.0
@@ -22,13 +24,24 @@ func actor_setup():
 func set_movement_target(movement_target: Vector2):
 	navigation_agent.target_position = movement_target
 
-#func punch_attack():
-	#
+func check_if_velocity_zero():
+	if not velocity.is_zero_approx():
+		_animation_player.play("walk")
+	elif _animation_player.get_current_animation() == "walk":
+		_animation_player.stop()
+
+# How to make punch
+# this get's called after navigation_agent is finished
+# for now play punch
+# enable the hitbox
+# then disable the hitbox
 
 func _physics_process(_delta):
+	check_if_velocity_zero()
 	if navigation_agent.is_navigation_finished():
-		# Punch!!!
-		
+		# TODO fix this punch attack
+		#punch_attack()
+		# TODO make it not just return here, continue
 		return
 	
 	# TODO Set movement target less often 
