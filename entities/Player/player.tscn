@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://csfw25lac81x1"]
+[gd_scene load_steps=20 format=3 uid="uid://csfw25lac81x1"]
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_d4p6m"]
 [ext_resource type="Texture2D" uid="uid://ctpq0wqq86qs6" path="res://icon.png" id="1_xjgi2"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="3_5mkto"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="4_x8v33"]
 [ext_resource type="Script" path="res://components/health.gd" id="5_62q20"]
+[ext_resource type="Script" path="res://components/invuln_timer.gd" id="5_relt5"]
 [ext_resource type="Script" path="res://components/statemachine.gd" id="6_jabk4"]
 [ext_resource type="Script" path="res://entities/Player/player_move_state.gd" id="7_sv7fj"]
 [ext_resource type="Script" path="res://entities/Player/player_attack1_state.gd" id="8_71a5d"]
@@ -381,6 +382,11 @@ health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CapsuleShape2D_se0lq")
+
+[node name="InvulnTimer" type="Node" parent="Hurtbox"]
+script = ExtResource("5_relt5")
+time_til_invulnerable = 0.5
+time_invulnerable = 0.5
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_62q20")
