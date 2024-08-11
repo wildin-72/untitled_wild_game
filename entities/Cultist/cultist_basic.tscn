@@ -1,9 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://cjbftd2fi2yxu"]
+[gd_scene load_steps=16 format=3 uid="uid://cjbftd2fi2yxu"]
 
 [ext_resource type="Script" path="res://entities/Cultist/cultist_basic.gd" id="1_4y5fg"]
 [ext_resource type="Texture2D" uid="uid://x2mkxioshh6f" path="res://assets/images/Enemies/Cultistgoon/Duckgoon_attack.png" id="2_jqte7"]
 [ext_resource type="Texture2D" uid="uid://be4omdevlbp7i" path="res://assets/images/Enemies/Cultistgoon/Duckgoon_WalkandIdle.png" id="3_73l8t"]
-[ext_resource type="Script" path="res://entities/Cultist/HitBox.gd" id="4_igkox"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="4_6tmia"]
+[ext_resource type="Script" path="res://components/statemachine.gd" id="5_vcpa2"]
+[ext_resource type="Script" path="res://entities/Cultist/CultistMoveState.gd" id="6_kl0sm"]
+[ext_resource type="Script" path="res://entities/Cultist/CultistPunchState.gd" id="7_glwpb"]
+[ext_resource type="Script" path="res://entities/Cultist/cultist_charge_state.gd" id="8_nhi67"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bq6n0"]
 radius = 15.0
@@ -11,7 +15,7 @@ height = 60.0
 
 [sub_resource type="Animation" id="Animation_tndjn"]
 resource_name = "charge_punch"
-length = 0.1
+length = 0.2
 loop_mode = 1
 step = 0.025
 tracks/0/type = "value"
@@ -33,16 +37,29 @@ tracks/1/path = NodePath("Sprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(4.28711e-05, 1e-05),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0, 0),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.025, 1.025)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_se502"]
 resource_name = "punch"
 length = 0.75
 loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -106,8 +123,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dorx0"]
-radius = 18.0
-height = 90.0
+radius = 28.0
+height = 114.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v040u"]
 radius = 40.0
@@ -124,7 +141,7 @@ shape = SubResource("CapsuleShape2D_bq6n0")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_jqte7")
+texture = ExtResource("3_73l8t")
 hframes = 3
 frame = 1
 
@@ -135,15 +152,43 @@ libraries = {
 }
 
 [node name="HitBox" type="Area2D" parent="."]
-script = ExtResource("4_igkox")
+script = ExtResource("4_6tmia")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-42, -15)
+position = Vector2(-59, -15)
 rotation = 1.5708
+scale = Vector2(1, 1.44)
 shape = SubResource("CapsuleShape2D_dorx0")
 disabled = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_v040u")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_vcpa2")
+initial_state = NodePath("Move")
+
+[node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator", "sprite", "navigation_agent")]
+script = ExtResource("6_kl0sm")
+cultist = NodePath("../..")
+animator = NodePath("../../Sprite2D/AnimationPlayer")
+sprite = NodePath("../../Sprite2D")
+navigation_agent = NodePath("../../NavigationAgent2D")
+
+[node name="Punch" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "sprite", "animator", "hitbox")]
+script = ExtResource("7_glwpb")
+cultist = NodePath("../..")
+sprite = NodePath("../../Sprite2D")
+animator = NodePath("../../Sprite2D/AnimationPlayer")
+hitbox = NodePath("../../HitBox/CollisionShape2D")
+
+[node name="Charge" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator", "sprite")]
+script = ExtResource("8_nhi67")
+cultist = NodePath("../..")
+animator = NodePath("../../Sprite2D/AnimationPlayer")
+sprite = NodePath("../../Sprite2D")
+
+[connection signal="flipped" from="StateMachine/Move" to="." method="_on_cultist_move_state_flipped"]
+[connection signal="unflipped" from="StateMachine/Move" to="." method="_on_cultist_move_state_unflipped"]
