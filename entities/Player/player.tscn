@@ -355,7 +355,7 @@ height = 58.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t5e8"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_d4p6m")
 
 [node name="Icon" type="Sprite2D" parent="."]

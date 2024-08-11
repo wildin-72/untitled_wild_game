@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://0gdvupnamyrc"]
 
-[ext_resource type="PackedScene" path="res://scenes/Menus/OptionsMenu/Input/InputOptionsMenu.tscn" id="1_0oyd7"]
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/Menus/OptionsMenu/OptionControl/SliderOptionControl.tscn" id="2_mc1yg"]
+[ext_resource type="PackedScene" uid="uid://dn6xaimgwkpaf" path="res://scenes/Menus/OptionsMenu/Input/InputOptionsMenu.tscn" id="1_0oyd7"]
+[ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://addons/maaacks_game_template/base/scenes/Menus/OptionsMenu/OptionControl/SliderOptionControl.tscn" id="2_mc1yg"]
 
 [node name="Controls" instance=ExtResource("1_0oyd7")]
 

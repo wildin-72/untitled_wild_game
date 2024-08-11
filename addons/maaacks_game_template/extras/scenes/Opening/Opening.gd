@@ -53,5 +53,5 @@ func _animate_images():
 func _ready():
 	SceneLoader.load_scene(next_scene, true)
 	_add_textures_to_container(images)
-	await(get_tree().create_timer(start_delay).timeout)
+	#await(get_tree().create_timer(start_delay).timeout)
 	_animate_images()
