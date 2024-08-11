@@ -10,7 +10,7 @@ signal flipped
 signal unflipped
 
 var movement_speed: float = 60.0
-var distance_in_front_of_player: float = 200.0
+var distance_in_front_of_player: float = 100.0
 
 func enter():
 	print("Entering Move State")
@@ -29,6 +29,7 @@ func set_movement_target(movement_target: Vector2):
 
 func check_if_velocity_zero():
 	if not cultist.velocity.is_zero_approx():
+		sprite.position.x = 0
 		animator.play("walk")
 	elif animator.get_current_animation() == "walk":
 		animator.stop()

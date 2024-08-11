@@ -1,6 +1,7 @@
 extends State
 
 @export var cultist : CharacterBody2D
+@export var sprite : Sprite2D
 @export var animator : AnimationPlayer
 @export var hitbox : CollisionShape2D
 

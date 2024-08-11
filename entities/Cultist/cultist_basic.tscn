@@ -13,9 +13,9 @@
 radius = 15.0
 height = 60.0
 
-[sub_resource type="Animation" id="Animation_gdtdv"]
-resource_name = "walk"
-length = 0.5
+[sub_resource type="Animation" id="Animation_tndjn"]
+resource_name = "charge_punch"
+length = 0.2
 loop_mode = 1
 step = 0.025
 tracks/0/type = "value"
@@ -123,8 +123,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dorx0"]
-radius = 18.0
-height = 90.0
+radius = 28.0
+height = 114.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v040u"]
 radius = 40.0
@@ -141,9 +141,9 @@ shape = SubResource("CapsuleShape2D_bq6n0")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_jqte7")
+texture = ExtResource("3_73l8t")
 hframes = 3
-frame = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 root_node = NodePath("../..")
@@ -155,8 +155,9 @@ libraries = {
 script = ExtResource("4_6tmia")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-42, -15)
+position = Vector2(-59, -15)
 rotation = 1.5708
+scale = Vector2(1, 1.44)
 shape = SubResource("CapsuleShape2D_dorx0")
 disabled = true
 
@@ -176,16 +177,18 @@ animator = NodePath("../../Sprite2D/AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 navigation_agent = NodePath("../../NavigationAgent2D")
 
-[node name="Punch" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator", "hitbox")]
+[node name="Punch" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "sprite", "animator", "hitbox")]
 script = ExtResource("7_glwpb")
 cultist = NodePath("../..")
+sprite = NodePath("../../Sprite2D")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
 hitbox = NodePath("../../HitBox/CollisionShape2D")
 
-[node name="Charge" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator")]
+[node name="Charge" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator", "sprite")]
 script = ExtResource("8_nhi67")
 cultist = NodePath("../..")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
+sprite = NodePath("../../Sprite2D")
 
 [connection signal="flipped" from="StateMachine/Move" to="." method="_on_cultist_move_state_flipped"]
 [connection signal="unflipped" from="StateMachine/Move" to="." method="_on_cultist_move_state_unflipped"]
