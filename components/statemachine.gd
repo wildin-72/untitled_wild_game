@@ -1,14 +1,17 @@
 extends Node
 class_name StateMachine
 
+#You may drag a state into the "initial state" variable 
+#in the inspector to set a defualt state
 @export var initial_state : State 
 
 
-#Track current state and create dictionary with file names as keys and scripts as values
+#Track current state and initialize empty "states" dictionary
 var current_state : State
 var states : Dictionary = {}
 
-#Check for states among children nodes
+#Check for state objects among children nodes, then add them to dictionary 
+#with the name of the node as the key and the node itself as the value
 func _ready():
 	for child in get_children():
 		if child is State:
