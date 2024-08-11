@@ -9,3 +9,7 @@ func set_damage(value: int):
 
 func get_damage() -> int:
 	return damage
+	
+
+
+

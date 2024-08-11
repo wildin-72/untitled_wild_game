@@ -46,8 +46,7 @@ func on_state_transition(current_state_name, new_state_name):
 	current_state = transitioning_to
 	
 	
-	
-		
+
 	
 	
 	 
