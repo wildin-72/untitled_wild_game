@@ -12,9 +12,9 @@ func charge_punch():
 	if cultist.flipped == true:
 		# sprite moves, meaning I have to make the position
 		# have an offset
-		sprite.position.x = 50
+		sprite.position.x = cultist.sprite_punch_offset
 	else:
-		sprite.position.x = -50
+		sprite.position.x = -cultist.sprite_punch_offset
 
 	await get_tree().create_timer(0.5).timeout
 	transition.emit(self, "Punch")

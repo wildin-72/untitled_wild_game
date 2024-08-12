@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://csfw25lac81x1"]
+[gd_scene load_steps=24 format=3 uid="uid://csfw25lac81x1"]
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_d4p6m"]
 [ext_resource type="Texture2D" uid="uid://bojoxhpm0kjpx" path="res://assets/images/Player/Player_WALK_centered.png" id="2_sojug"]
@@ -9,13 +9,10 @@
 [ext_resource type="Script" path="res://components/health.gd" id="5_62q20"]
 [ext_resource type="Script" path="res://components/statemachine.gd" id="6_jabk4"]
 [ext_resource type="Script" path="res://entities/Player/player_idle_state.gd" id="7_1qobw"]
-[ext_resource type="Script" path="res://components/invuln_timer.gd" id="7_ervk7"]
 [ext_resource type="Script" path="res://entities/Player/player_move_state.gd" id="7_sv7fj"]
 [ext_resource type="Script" path="res://entities/Player/player_attack1_state.gd" id="8_71a5d"]
 [ext_resource type="Script" path="res://entities/Player/player_attack2_state.gd" id="9_ylbjf"]
 [ext_resource type="Script" path="res://entities/Player/player_attack3_state.gd" id="10_310bg"]
-[ext_resource type="Script" path="res://entities/Player/player_hurt_state.gd" id="11_ddd2v"]
-[ext_resource type="Script" path="res://entities/Player/player_dead_state.gd" id="12_3k50m"]
 
 [sub_resource type="Animation" id="Animation_3jn3w"]
 length = 0.001
@@ -127,30 +124,6 @@ tracks/8/keys = {
 "update": 0,
 "values": [Vector2(5, -20)]
 }
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Icon:self_modulate")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0, 0, 1)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Icon:rotation")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-1.5708]
-}
 
 [sub_resource type="Animation" id="Animation_o74dv"]
 resource_name = "attack1"
@@ -238,18 +211,6 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [1.5708]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Icon:self_modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_im36q"]
@@ -351,18 +312,6 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [1.5708]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Icon:self_modulate")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_afccx"]
@@ -477,98 +426,6 @@ tracks/8/keys = {
 "update": 0,
 "values": [0.0]
 }
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Icon:self_modulate")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_tgoao"]
-resource_name = "die"
-length = 0.9
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Icon:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, -20), Vector2(-10, 100)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Icon:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -1.5708]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Icon:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0, 0, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Icon:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-
-[sub_resource type="Animation" id="Animation_3r48x"]
-resource_name = "hurt"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Icon:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-10, -20), Vector2(0, -20)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Icon:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_78f81"]
 resource_name = "idle"
@@ -598,42 +455,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Icon:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Icon:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -20)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Icon:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_akdc2"]
@@ -665,42 +486,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Icon:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Icon:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -20)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Icon:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_olu7p"]
 _data = {
@@ -708,8 +493,6 @@ _data = {
 "attack1": SubResource("Animation_o74dv"),
 "attack2": SubResource("Animation_im36q"),
 "attack3": SubResource("Animation_afccx"),
-"die": SubResource("Animation_tgoao"),
-"hurt": SubResource("Animation_3r48x"),
 "idle": SubResource("Animation_78f81"),
 "walk": SubResource("Animation_akdc2")
 }
@@ -723,14 +506,11 @@ height = 212.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t5e8"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_d4p6m")
-health = NodePath("Health")
 
 [node name="Icon" type="Sprite2D" parent="."]
-self_modulate = Color(1, 0, 0, 1)
 position = Vector2(5, -20)
-rotation = -1.5708
 scale = Vector2(1.23, 1.23)
 texture = ExtResource("2_sojug")
 hframes = 4
@@ -760,11 +540,6 @@ health = NodePath("../Health")
 position = Vector2(0, 11)
 shape = SubResource("CapsuleShape2D_se0lq")
 
-[node name="InvulnTimer" type="Node" parent="Hurtbox"]
-script = ExtResource("7_ervk7")
-time_til_invulnerable = 0.09
-time_invulnerable = 0.5
-
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_62q20")
 
@@ -783,15 +558,6 @@ actor = NodePath("../..")
 animator = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Icon")
 hitbox = NodePath("../../Hitbox")
-
-[node name="PlayerHurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
-script = ExtResource("11_ddd2v")
-animator = NodePath("../../AnimationPlayer")
-
-[node name="PlayerDeadState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
-script = ExtResource("12_3k50m")
-actor = NodePath("../..")
-animator = NodePath("../../AnimationPlayer")
 
 [node name="PlayerMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "sprite", "hitbox")]
 script = ExtResource("7_sv7fj")
@@ -815,8 +581,5 @@ script = ExtResource("10_310bg")
 animator = NodePath("../../AnimationPlayer")
 actor = NodePath("../..")
 
-[connection signal="received_damage" from="Hurtbox" to="." method="_on_hurtbox_received_damage"]
-[connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
-[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="flipped" from="StateMachine/PlayerMoveState" to="." method="_on_player_move_state_flipped"]
 [connection signal="unflipped" from="StateMachine/PlayerMoveState" to="." method="_on_player_move_state_unflipped"]

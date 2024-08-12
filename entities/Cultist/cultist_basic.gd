@@ -10,6 +10,14 @@ extends CharacterBody2D
 @export var state_machine : StateMachine
 @export var health : Health
 
+# this is the offset of the punch sprites
+# because they are offcentered
+@export var sprite_punch_offset: int = 50
+# how far cultist is knockedback
+@export var knockback_distance: int = 60
+# the y range that player has to be in order to punch
+@export var distance_from_player_y: int = 30
+
 func _on_cultist_move_state_flipped():
 	flipped = true
 
@@ -25,6 +33,3 @@ func _on_hurtbox_received_damage(damage, entity_who_hit):
 
 func _on_health_health_depleted():
 	state_machine.on_state_transition(state_machine.current_state, "Death")
-
-func _process(_delta):
-	move_and_slide()

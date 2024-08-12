@@ -42,7 +42,7 @@ func check_if_velocity_zero():
 
 func physics_update(_delta):
 	check_if_velocity_zero()
-	if navigation_agent.is_navigation_finished():
+	if navigation_agent.is_navigation_finished() or is_close_to_player():
 		animator.stop()
 		transition.emit(self, "Charge")
 		return
@@ -66,4 +66,12 @@ func physics_update(_delta):
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 	
 	cultist.velocity = current_cultist_position.direction_to(next_path_position) * movement_speed
-	#cultist.move_and_slide()
+	cultist.move_and_slide()
+
+func is_close_to_player() -> bool:
+	if abs(player.position.y - cultist.position.y) <= cultist.distance_from_player_y:
+		if flipped and player.position.x > cultist.position.x - distance_in_front_of_player:
+			return true
+		elif not flipped and player.position.x < cultist.position.x + distance_in_front_of_player:
+			return true
+	return false
