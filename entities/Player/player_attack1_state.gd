@@ -26,8 +26,9 @@ func _unhandled_input(event):
 		await animator.animation_finished
 		combo = false
 		transition.emit(self, "PlayerAttack2State")
-		
-		
+		get_viewport().set_input_as_handled()
+
+
 func reset_animation(animation, position):
 	animation.track_set_key_value(0, 0, position)
 	
