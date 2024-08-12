@@ -132,7 +132,7 @@ height = 114.0
 radius = 34.0
 height = 222.0
 
-[node name="CultistBasic" type="CharacterBody2D" groups=["Cultist"]]
+[node name="CultistBasic" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_4y5fg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -200,5 +200,6 @@ cultist = NodePath("../..")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 
+[connection signal="received_damage" from="Hurtbox" to="." method="_on_hurtbox_received_damage"]
 [connection signal="flipped" from="StateMachine/Move" to="." method="_on_cultist_move_state_flipped"]
 [connection signal="unflipped" from="StateMachine/Move" to="." method="_on_cultist_move_state_unflipped"]
