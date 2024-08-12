@@ -23,7 +23,7 @@ func set_max_health(value: int):
 		
 		if health > max_health:
 			health = max_health
-
+	
 
 func get_max_health() -> int:
 	return max_health
@@ -40,7 +40,7 @@ func set_health(value: int):
 		
 		if health <= 0:
 			health_depleted.emit()
-
+	print(health)
 
 func get_health():
 	return health
