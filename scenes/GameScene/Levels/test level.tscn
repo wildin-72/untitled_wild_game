@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://csu5r8hnwt2jw"]
+
+[ext_resource type="Texture2D" uid="uid://beyxx4oivhv11" path="res://assets/images/maps/test map.jpg" id="1_85y3a"]
+[ext_resource type="PackedScene" uid="uid://csfw25lac81x1" path="res://entities/Player/player.tscn" id="1_sfwoj"]
+[ext_resource type="PackedScene" uid="uid://cjbftd2fi2yxu" path="res://entities/Cultist/cultist_basic.tscn" id="2_a5plb"]
+[ext_resource type="Script" path="res://scenes/GameScene/Levels/EnemyHolder.gd" id="3_fi3mq"]
+
+[node name="World" type="Node2D"]
+y_sort_enabled = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(640, 0)
+texture = ExtResource("1_85y3a")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-640, 0)
+texture = ExtResource("1_85y3a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-1283, -361, -1280, 144, 1283, 142, 1283, -356)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-1304, 385, 1296, 382, 1306, 136, 1277, 142, 1283, 360, -1278, 360, -1282, 145, -1316, 155)
+
+[node name="Player" parent="." instance=ExtResource("1_sfwoj")]
+y_sort_enabled = true
+position = Vector2(-104, 162)
+metadata/_edit_group_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_left = -1280
+limit_top = -360
+limit_right = 1180
+limit_bottom = 360
+
+[node name="EnemySpawn" type="Marker2D" parent="."]
+position = Vector2(810, 231)
+
+[node name="EnemySpawn2" type="Marker2D" parent="."]
+position = Vector2(601, 220)
+
+[node name="EnemyHolder" type="Node" parent="."]
+script = ExtResource("3_fi3mq")
+
+[node name="CultistBasic" parent="EnemyHolder" instance=ExtResource("2_a5plb")]
+position = Vector2(227.932, 166.749)
