@@ -10,10 +10,6 @@ const JUMP_VELOCITY = -400.0
 @export var flipped: bool = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 
-
-
-
-
 func _on_player_move_state_flipped():
 	flipped = true
 

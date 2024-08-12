@@ -13,3 +13,7 @@ func _on_cultist_move_state_flipped():
 
 func _on_cultist_move_state_unflipped():
 	flipped = false
+
+func _on_hurtbox_received_damage(damage, entity_who_hit):
+	if not entity_who_hit.is_in_group("enemy"):
+		print("aaah, cultist is hit!")

@@ -3,8 +3,9 @@ extends Area2D
 
 #Signal is emitted when a hitbox object in group "enemy" is detected,
 #sends the "damage" value stored in that hitbox object 
+#send hitbox owner to signal to check within own script
 #note: the signal is not connected to any function by default
-signal received_damage(damage: int)
+signal received_damage(damage: int, owner: CharacterBody2D)
 
 #Plug in health object in the inspector, 
 #damage will be subtracted from the values stored in this object
@@ -30,15 +31,14 @@ func _ready():
 func _on_area_entered(area: Area2D) -> void:
 	#print("player hurtbox entered")
 	if area is Hitbox:
-		print("PLAYER HIT")
+		#print("PLAYER HIT")
 		var hitbox = area as Hitbox
 		if hitbox and hitbox.owner:
 			#Collect hitbox data
 			var damage = hitbox.damage
 			#Apply damage to the health value stored in the export variable
 			if damage > 0:
-				health.health -= hitbox.damage
-				received_damage.emit(hitbox.damage)
+				received_damage.emit(hitbox.damage, hitbox.owner)
 	if invulnerability_timer:
 		invulnerability_timer.run()
 
