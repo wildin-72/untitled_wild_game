@@ -135,12 +135,12 @@ radius = 34.0
 height = 222.0
 
 [node name="CultistBasic" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "health") groups=["Enemy"]]
+y_sort_enabled = true
 script = ExtResource("1_4y5fg")
 state_machine = NodePath("StateMachine")
 health = NodePath("Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 96)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_bq6n0")
 
@@ -148,6 +148,7 @@ shape = SubResource("CapsuleShape2D_bq6n0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jqte7")
+offset = Vector2(0, -96)
 hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
@@ -161,7 +162,7 @@ collision_mask = 0
 script = ExtResource("4_6tmia")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-59, -15)
+position = Vector2(-59, -111)
 rotation = 1.5708
 scale = Vector2(1, 1.44)
 shape = SubResource("CapsuleShape2D_dorx0")
@@ -174,7 +175,7 @@ script = ExtResource("9_p7xoj")
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(10, 0)
+position = Vector2(10, -96)
 shape = SubResource("CapsuleShape2D_l31x5")
 
 [node name="Health" type="Node" parent="."]

@@ -41,7 +41,8 @@ position = Vector2(810, 231)
 [node name="EnemySpawn2" type="Marker2D" parent="."]
 position = Vector2(601, 220)
 
-[node name="EnemyHolder" type="Node" parent="."]
+[node name="EnemyHolder" type="Node2D" parent="."]
+y_sort_enabled = true
 script = ExtResource("3_fi3mq")
 
 [node name="CultistBasic" parent="EnemyHolder" instance=ExtResource("2_a5plb")]
