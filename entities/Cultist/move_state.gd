@@ -66,4 +66,4 @@ func physics_update(_delta):
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 	
 	cultist.velocity = current_cultist_position.direction_to(next_path_position) * movement_speed
-	cultist.move_and_slide()
+	#cultist.move_and_slide()
