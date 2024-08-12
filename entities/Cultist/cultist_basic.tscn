@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cjbftd2fi2yxu"]
+[gd_scene load_steps=20 format=3 uid="uid://cjbftd2fi2yxu"]
 
 [ext_resource type="Script" path="res://entities/Cultist/cultist_basic.gd" id="1_4y5fg"]
 [ext_resource type="Texture2D" uid="uid://x2mkxioshh6f" path="res://assets/images/Enemies/Cultistgoon/Duckgoon_attack.png" id="2_jqte7"]
@@ -6,10 +6,12 @@
 [ext_resource type="Script" path="res://components/hitbox.gd" id="4_6tmia"]
 [ext_resource type="Script" path="res://components/statemachine.gd" id="5_vcpa2"]
 [ext_resource type="Script" path="res://components/health.gd" id="6_1crm1"]
-[ext_resource type="Script" path="res://entities/Cultist/CultistMoveState.gd" id="6_kl0sm"]
-[ext_resource type="Script" path="res://entities/Cultist/CultistPunchState.gd" id="7_glwpb"]
-[ext_resource type="Script" path="res://entities/Cultist/cultist_charge_state.gd" id="8_nhi67"]
+[ext_resource type="Script" path="res://entities/Cultist/move_state.gd" id="8_bqm5b"]
+[ext_resource type="Script" path="res://entities/Cultist/punch_state.gd" id="9_e47el"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="9_p7xoj"]
+[ext_resource type="Script" path="res://entities/Cultist/charge_state.gd" id="10_b8002"]
+[ext_resource type="Script" path="res://entities/Cultist/hit_state.gd" id="11_1k5dw"]
+[ext_resource type="Script" path="res://entities/Cultist/death_state.gd" id="12_frrqq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bq6n0"]
 radius = 15.0
@@ -132,8 +134,10 @@ height = 114.0
 radius = 34.0
 height = 222.0
 
-[node name="CultistBasic" type="CharacterBody2D" groups=["Enemy"]]
+[node name="CultistBasic" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "health") groups=["Enemy"]]
 script = ExtResource("1_4y5fg")
+state_machine = NodePath("StateMachine")
+health = NodePath("Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 96)
@@ -181,25 +185,34 @@ script = ExtResource("5_vcpa2")
 initial_state = NodePath("Move")
 
 [node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator", "sprite", "navigation_agent")]
-script = ExtResource("6_kl0sm")
+script = ExtResource("8_bqm5b")
 cultist = NodePath("../..")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 navigation_agent = NodePath("../../NavigationAgent2D")
 
 [node name="Punch" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "sprite", "animator", "hitbox")]
-script = ExtResource("7_glwpb")
+script = ExtResource("9_e47el")
 cultist = NodePath("../..")
 sprite = NodePath("../../Sprite2D")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
 hitbox = NodePath("../../HitBox/CollisionShape2D")
 
 [node name="Charge" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator", "sprite")]
-script = ExtResource("8_nhi67")
+script = ExtResource("10_b8002")
 cultist = NodePath("../..")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 
+[node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist")]
+script = ExtResource("11_1k5dw")
+cultist = NodePath("../..")
+
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist")]
+script = ExtResource("12_frrqq")
+cultist = NodePath("../..")
+
 [connection signal="received_damage" from="Hurtbox" to="." method="_on_hurtbox_received_damage"]
+[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="flipped" from="StateMachine/Move" to="." method="_on_cultist_move_state_flipped"]
 [connection signal="unflipped" from="StateMachine/Move" to="." method="_on_cultist_move_state_unflipped"]

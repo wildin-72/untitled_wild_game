@@ -9,6 +9,7 @@ func enter():
 	punch()
 
 func punch():
+	cultist.velocity = Vector2(0,0)
 	if cultist.flipped == true:
 		hitbox.position.x = abs(hitbox.position.x)
 	else:
