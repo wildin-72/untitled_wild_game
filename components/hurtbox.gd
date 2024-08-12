@@ -30,7 +30,6 @@ func _ready():
 func _on_area_entered(area: Area2D) -> void:
 	#print("player hurtbox entered")
 	if area is Hitbox:
-		print("PLAYER HIT")
 		var hitbox = area as Hitbox
 		if hitbox and hitbox.owner:
 			#Collect hitbox data
@@ -39,6 +38,7 @@ func _on_area_entered(area: Area2D) -> void:
 			if damage > 0:
 				health.health -= hitbox.damage
 				received_damage.emit(hitbox.damage)
+				print("damage taken")
 	if invulnerability_timer:
 		invulnerability_timer.run()
 

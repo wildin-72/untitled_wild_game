@@ -30,9 +30,13 @@ func physics_update(delta):
 	else:
 		actor.velocity = actor.velocity.move_toward(Vector2.ZERO, actor.SPEED)
 	actor.move_and_slide()
-	
+
 	if actor.velocity == Vector2.ZERO:
 		transition.emit(self, "PlayerIdleState")
+	if actor.dead:
+		transition.emit(self, "PlayerDeadState")
+	if actor.health_changed:
+		transition.emit(self, "PlayerHurtState")
 
 
 
