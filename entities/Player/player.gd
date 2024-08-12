@@ -24,13 +24,12 @@ func _on_player_move_state_unflipped():
 
 
 
+func _on_health_health_depleted():
+	dead = true
 
-func _on_hurtbox_received_damage(damage):
+
+func _on_hurtbox_received_damage(damage, owner):
+	health.health -= damage
 	health_changed = true
 	await get_tree().create_timer(0.1).timeout
 	health_changed = false
-
-
-
-func _on_health_health_depleted():
-	dead = true
