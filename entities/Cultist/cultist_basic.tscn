@@ -1,13 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://cjbftd2fi2yxu"]
+[gd_scene load_steps=18 format=3 uid="uid://cjbftd2fi2yxu"]
 
 [ext_resource type="Script" path="res://entities/Cultist/cultist_basic.gd" id="1_4y5fg"]
 [ext_resource type="Texture2D" uid="uid://x2mkxioshh6f" path="res://assets/images/Enemies/Cultistgoon/Duckgoon_attack.png" id="2_jqte7"]
 [ext_resource type="Texture2D" uid="uid://be4omdevlbp7i" path="res://assets/images/Enemies/Cultistgoon/Duckgoon_WalkandIdle.png" id="3_73l8t"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="4_6tmia"]
 [ext_resource type="Script" path="res://components/statemachine.gd" id="5_vcpa2"]
+[ext_resource type="Script" path="res://components/health.gd" id="6_1crm1"]
 [ext_resource type="Script" path="res://entities/Cultist/CultistMoveState.gd" id="6_kl0sm"]
 [ext_resource type="Script" path="res://entities/Cultist/CultistPunchState.gd" id="7_glwpb"]
 [ext_resource type="Script" path="res://entities/Cultist/cultist_charge_state.gd" id="8_nhi67"]
+[ext_resource type="Script" path="res://components/hurtbox.gd" id="9_p7xoj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bq6n0"]
 radius = 15.0
@@ -126,9 +128,9 @@ _data = {
 radius = 28.0
 height = 114.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v040u"]
-radius = 40.0
-height = 196.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l31x5"]
+radius = 34.0
+height = 222.0
 
 [node name="CultistBasic" type="CharacterBody2D" groups=["Cultist"]]
 script = ExtResource("1_4y5fg")
@@ -141,9 +143,8 @@ shape = SubResource("CapsuleShape2D_bq6n0")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_73l8t")
+texture = ExtResource("2_jqte7")
 hframes = 3
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 root_node = NodePath("../..")
@@ -152,6 +153,7 @@ libraries = {
 }
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_mask = 0
 script = ExtResource("4_6tmia")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
@@ -161,10 +163,18 @@ scale = Vector2(1, 1.44)
 shape = SubResource("CapsuleShape2D_dorx0")
 disabled = true
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("9_p7xoj")
+health = NodePath("../Health")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("CapsuleShape2D_v040u")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(10, 0)
+shape = SubResource("CapsuleShape2D_l31x5")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("6_1crm1")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_vcpa2")

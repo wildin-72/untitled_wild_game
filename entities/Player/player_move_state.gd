@@ -9,6 +9,10 @@ var input_vector: Vector2
 signal flipped
 signal unflipped
 
+func enter():
+	animator.play("walk")
+
+
 func physics_update(delta):
 	input_vector = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down")).normalized()
 	
@@ -26,6 +30,11 @@ func physics_update(delta):
 	else:
 		actor.velocity = actor.velocity.move_toward(Vector2.ZERO, actor.SPEED)
 	actor.move_and_slide()
+	
+	if actor.velocity == Vector2.ZERO:
+		transition.emit(self, "PlayerIdleState")
+
+
 
 
 func _unhandled_input(event):
