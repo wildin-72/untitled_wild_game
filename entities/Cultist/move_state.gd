@@ -42,7 +42,7 @@ func check_if_velocity_zero():
 
 func physics_update(_delta):
 	check_if_velocity_zero()
-	if navigation_agent.is_navigation_finished() or is_close_to_player():
+	if navigation_agent.is_navigation_finished():
 		animator.stop()
 		transition.emit(self, "Charge")
 		return
@@ -62,6 +62,10 @@ func physics_update(_delta):
 		emit_signal("unflipped")
 		set_movement_target(Vector2(player.position.x + distance_in_front_of_player, player.position.y))
 	
+	if is_close_to_player():
+		animator.stop()
+		transition.emit(self, "Charge")
+		return
 	var current_cultist_position: Vector2 = cultist.global_position
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 	

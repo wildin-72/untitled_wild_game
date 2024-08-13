@@ -744,7 +744,6 @@ position = Vector2(0, -20)
 rotation = -1.5708
 scale = Vector2(1.23, 1.23)
 texture = ExtResource("2_sojug")
-offset = Vector2(0, -96)
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -769,13 +768,14 @@ script = ExtResource("4_x8v33")
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -96)
+position = Vector2(0, 11)
 shape = SubResource("CapsuleShape2D_se0lq")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_62q20")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_2t5e8")
 
