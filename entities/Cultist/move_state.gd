@@ -29,7 +29,6 @@ func set_movement_target(movement_target: Vector2):
 
 func check_if_velocity_zero():
 	if not cultist.velocity.is_zero_approx():
-		sprite.position.x = 0
 		animator.play("walk")
 	elif animator.get_current_animation() == "walk":
 		animator.stop()
@@ -40,12 +39,15 @@ func check_if_velocity_zero():
 # enable the hitbox
 # then disable the hitbox
 
+func change_to_charge():
+	animator.stop()
+	transition.emit(self, "Charge")
+	return
+
 func physics_update(_delta):
 	check_if_velocity_zero()
-	if navigation_agent.is_navigation_finished():
-		animator.stop()
-		transition.emit(self, "Charge")
-		return
+	if navigation_agent.is_navigation_finished() or is_close_to_player():
+		change_to_charge()
 	
 	# TODO Set movement target less often 
 	# this could cause performance issues later
@@ -63,19 +65,18 @@ func physics_update(_delta):
 		set_movement_target(Vector2(player.position.x + distance_in_front_of_player, player.position.y))
 	
 	if is_close_to_player():
-		animator.stop()
-		transition.emit(self, "Charge")
-		return
+		change_to_charge()
 	var current_cultist_position: Vector2 = cultist.global_position
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 	
 	cultist.velocity = current_cultist_position.direction_to(next_path_position) * movement_speed
+
 	cultist.move_and_slide()
 
 func is_close_to_player() -> bool:
 	if abs(player.position.y - cultist.position.y) <= cultist.distance_from_player_y:
-		if flipped and player.position.x > cultist.position.x - distance_in_front_of_player:
+		if flipped and player.position.x > cultist.position.x - distance_in_front_of_player and player.position.x < cultist.position.x:
 			return true
-		elif not flipped and player.position.x < cultist.position.x + distance_in_front_of_player:
+		elif !flipped and player.position.x < cultist.position.x + distance_in_front_of_player and player.position.x > cultist.position.x:
 			return true
 	return false
