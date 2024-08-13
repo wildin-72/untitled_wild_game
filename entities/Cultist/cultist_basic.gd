@@ -15,8 +15,6 @@ extends CharacterBody2D
 @export var sprite_punch_offset: int = 50
 # how far cultist is knockedback
 @export var knockback_distance: int = 60
-# the y range that player has to be in order to punch
-@export var distance_from_player_y: int = 30
 
 func _on_cultist_move_state_flipped():
 	flipped = true
