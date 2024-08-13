@@ -40,6 +40,7 @@ func on_state_transition(current_state_name, new_state_name):
 	#Check for new state name in dictionary 
 	var transitioning_to = states.get(new_state_name.to_lower())
 	if !transitioning_to:
+		print("No transition named %s", new_state_name.to_lower())
 		return
 	#Check if current state, if true, call exit on current state
 	if current_state:

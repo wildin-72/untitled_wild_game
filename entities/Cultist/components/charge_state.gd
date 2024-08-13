@@ -4,10 +4,12 @@ extends State
 @export var animator : AnimationPlayer
 @export var sprite : Sprite2D
 
-func enter():
-	charge_punch()
+signal attack
 
-func charge_punch():
-	animator.play("charge_punch")
+func enter():
+	charge()
+
+func charge():
+	animator.play("charge")
 	await get_tree().create_timer(0.5).timeout
-	transition.emit(self, "Punch")
+	emit_signal("attack")

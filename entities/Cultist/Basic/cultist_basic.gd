@@ -15,6 +15,10 @@ extends CharacterBody2D
 @export var sprite_punch_offset: int = 50
 # how far cultist is knockedback
 @export var knockback_distance: int = 60
+# distance x and y player must be under for attack to occur
+@export var distance_from_player_x : int = 160
+@export var distance_from_player_y : int = 60
+@export var movement_speed : int = 60
 
 func _on_cultist_move_state_flipped():
 	flipped = true
@@ -31,3 +35,6 @@ func _on_hurtbox_received_damage(damage, entity_who_hit):
 
 func _on_health_health_depleted():
 	state_machine.on_state_transition(state_machine.current_state, "Death")
+
+func _on_charge_attack():
+	state_machine.on_state_transition(state_machine.current_state, "Punch")

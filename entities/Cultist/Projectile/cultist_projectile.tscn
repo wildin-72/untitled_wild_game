@@ -1,24 +1,26 @@
-[gd_scene load_steps=20 format=3 uid="uid://cjbftd2fi2yxu"]
+[gd_scene load_steps=22 format=3 uid="uid://btuf5s7dicvbh"]
 
-[ext_resource type="Script" path="res://entities/Cultist/cultist_basic.gd" id="1_4y5fg"]
-[ext_resource type="Texture2D" uid="uid://bmkmthy1p5s7u" path="res://assets/images/Enemies/Cultistgoon/Duckgoon_WalkandIdle-sheet.png" id="2_0j3ix"]
-[ext_resource type="Texture2D" uid="uid://bw1xaq1opin10" path="res://assets/images/Enemies/Cultistgoon/Duckgoon_attack-sheet.png" id="3_d8mpq"]
-[ext_resource type="Script" path="res://components/hitbox.gd" id="4_6tmia"]
-[ext_resource type="Script" path="res://components/statemachine.gd" id="5_vcpa2"]
-[ext_resource type="Script" path="res://components/health.gd" id="6_1crm1"]
-[ext_resource type="Script" path="res://entities/Cultist/move_state.gd" id="8_bqm5b"]
-[ext_resource type="Script" path="res://entities/Cultist/punch_state.gd" id="9_e47el"]
-[ext_resource type="Script" path="res://components/hurtbox.gd" id="9_p7xoj"]
-[ext_resource type="Script" path="res://entities/Cultist/charge_state.gd" id="10_b8002"]
-[ext_resource type="Script" path="res://entities/Cultist/hit_state.gd" id="11_1k5dw"]
-[ext_resource type="Script" path="res://entities/Cultist/death_state.gd" id="12_frrqq"]
+[ext_resource type="Script" path="res://entities/Cultist/Projectile/cultist_projectile.gd" id="1_njrc8"]
+[ext_resource type="Texture2D" uid="uid://bawg68ivmc0aa" path="res://assets/images/Enemies/Cultistgoon/Projectile_Duckgoon_WalkandIdle.png" id="2_mhpk8"]
+[ext_resource type="Texture2D" uid="uid://bw1xaq1opin10" path="res://assets/images/Enemies/Cultistgoon/Duckgoon_attack-sheet.png" id="2_w4yhs"]
+[ext_resource type="Texture2D" uid="uid://cxu1qtjr7n3ah" path="res://assets/images/Enemies/Cultistgoon/Projectile_Duckgoon_attack.png" id="3_2c3kl"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="4_hauhk"]
+[ext_resource type="Script" path="res://components/hurtbox.gd" id="5_bpeyf"]
+[ext_resource type="Script" path="res://components/health.gd" id="6_p2p3e"]
+[ext_resource type="Script" path="res://components/statemachine.gd" id="7_gfvxy"]
+[ext_resource type="Script" path="res://entities/Cultist/components/move_state.gd" id="8_swrfs"]
+[ext_resource type="Script" path="res://entities/Cultist/components/charge_state.gd" id="10_3a8i3"]
+[ext_resource type="Script" path="res://entities/Cultist/Projectile/fireball_state.gd" id="10_bxbgw"]
+[ext_resource type="Script" path="res://entities/Cultist/components/hit_state.gd" id="11_57aty"]
+[ext_resource type="PackedScene" uid="uid://cwukenqy702ve" path="res://entities/Cultist/Projectile/fireball.tscn" id="11_u4u2p"]
+[ext_resource type="Script" path="res://entities/Cultist/components/death_state.gd" id="12_kbnfm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bq6n0"]
 radius = 15.0
 height = 60.0
 
 [sub_resource type="Animation" id="Animation_tndjn"]
-resource_name = "charge_punch"
+resource_name = "charge"
 length = 0.2
 loop_mode = 1
 step = 0.025
@@ -32,7 +34,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_d8mpq")]
+"values": [ExtResource("3_2c3kl")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -74,7 +76,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_d8mpq")]
+"values": [ExtResource("2_w4yhs")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -104,7 +106,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_0j3ix")]
+"values": [ExtResource("2_mhpk8")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -121,7 +123,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m3idh"]
 _data = {
-"charge_punch": SubResource("Animation_tndjn"),
+"charge": SubResource("Animation_tndjn"),
 "punch": SubResource("Animation_se502"),
 "walk": SubResource("Animation_gdtdv")
 }
@@ -134,10 +136,11 @@ height = 114.0
 radius = 34.0
 height = 222.0
 
-[node name="CultistBasic" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "health") groups=["Enemy"]]
-script = ExtResource("1_4y5fg")
+[node name="CultistProjectile" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "health") groups=["Enemy"]]
+script = ExtResource("1_njrc8")
 state_machine = NodePath("StateMachine")
 health = NodePath("Health")
+distance_from_player_y = 400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 96)
@@ -147,8 +150,9 @@ shape = SubResource("CapsuleShape2D_bq6n0")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_d8mpq")
+texture = ExtResource("2_mhpk8")
 hframes = 3
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 root_node = NodePath("../..")
@@ -158,7 +162,7 @@ libraries = {
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_mask = 0
-script = ExtResource("4_6tmia")
+script = ExtResource("4_hauhk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(-59, -15)
@@ -170,48 +174,52 @@ disabled = true
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("9_p7xoj")
+script = ExtResource("5_bpeyf")
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CapsuleShape2D_l31x5")
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("6_1crm1")
+script = ExtResource("6_p2p3e")
 max_health = 5
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("5_vcpa2")
+script = ExtResource("7_gfvxy")
 initial_state = NodePath("Move")
 
 [node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator", "sprite", "navigation_agent")]
-script = ExtResource("8_bqm5b")
+script = ExtResource("8_swrfs")
 cultist = NodePath("../..")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 navigation_agent = NodePath("../../NavigationAgent2D")
 
-[node name="Punch" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator", "hitbox")]
-script = ExtResource("9_e47el")
+[node name="Fireball" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "fireball_spawn")]
+script = ExtResource("10_bxbgw")
 cultist = NodePath("../..")
-animator = NodePath("../../Sprite2D/AnimationPlayer")
-hitbox = NodePath("../../HitBox/CollisionShape2D")
+fireball_scene = ExtResource("11_u4u2p")
+fireball_spawn = NodePath("../../FireballSpawn")
 
 [node name="Charge" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator", "sprite")]
-script = ExtResource("10_b8002")
+script = ExtResource("10_3a8i3")
 cultist = NodePath("../..")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 
 [node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist")]
-script = ExtResource("11_1k5dw")
+script = ExtResource("11_57aty")
 cultist = NodePath("../..")
 
 [node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist")]
-script = ExtResource("12_frrqq")
+script = ExtResource("12_kbnfm")
 cultist = NodePath("../..")
+
+[node name="FireballSpawn" type="Marker2D" parent="."]
+position = Vector2(-82, -14)
 
 [connection signal="received_damage" from="Hurtbox" to="." method="_on_hurtbox_received_damage"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="flipped" from="StateMachine/Move" to="." method="_on_cultist_move_state_flipped"]
 [connection signal="unflipped" from="StateMachine/Move" to="." method="_on_cultist_move_state_unflipped"]
+[connection signal="attack" from="StateMachine/Charge" to="." method="_on_charge_attack"]

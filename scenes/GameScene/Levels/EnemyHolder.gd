@@ -1,7 +1,8 @@
 extends Node
 
 @onready var num_enemies = get_child_count()
-@onready var enemy = preload("res://entities/Cultist/cultist_basic.tscn")
+@onready var enemy_basic = preload("res://entities/Cultist/Basic/cultist_basic.tscn")
+@onready var enemy_projectile = preload("res://entities/Cultist/Projectile/cultist_projectile.tscn")
 var spawn_end
 
 
@@ -15,8 +16,8 @@ func next_wave():
 
 		
 func spawn_enemies():
-	var enemy1 = enemy.instantiate()
-	var enemy2 = enemy.instantiate()
+	var enemy1 = enemy_basic.instantiate()
+	var enemy2 = enemy_projectile.instantiate()
 	enemy1.position = get_parent().get_node("EnemySpawn").position
 	enemy2.position = get_parent().get_node("EnemySpawn2").position
 	add_child(enemy1)
@@ -28,5 +29,4 @@ func spawn_enemies():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	num_enemies = get_child_count()
-	print(spawn_end)
 	next_wave()
