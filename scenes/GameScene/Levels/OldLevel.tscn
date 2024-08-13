@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bie7f0ef164a5"]
 
 [ext_resource type="Script" path="res://scenes/GameScene/Levels/OldLevel.gd" id="1_oamgl"]
-[ext_resource type="PackedScene" uid="uid://cjbftd2fi2yxu" path="res://entities/Cultist/cultist_basic.tscn" id="2_y4qgs"]
+[ext_resource type="PackedScene" uid="uid://cjbftd2fi2yxu" path="res://entities/Cultist/Basic/cultist_basic.tscn" id="2_y4qgs"]
 [ext_resource type="PackedScene" uid="uid://csfw25lac81x1" path="res://entities/Player/player.tscn" id="3_l4ah4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pyoun"]

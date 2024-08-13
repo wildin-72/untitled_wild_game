@@ -28,8 +28,11 @@ func _on_health_health_depleted():
 	dead = true
 
 
-func _on_hurtbox_received_damage(damage, owner):
-	health.health -= damage
-	health_changed = true
-	await get_tree().create_timer(0.1).timeout
-	health_changed = false
+func _on_hurtbox_received_damage(damage, entity_who_hit):
+	if entity_who_hit.is_in_group("Enemy"):
+		health.health -= damage
+		health_changed = true
+		if entity_who_hit.is_in_group("Fireball"):
+			entity_who_hit.queue_free()
+		await get_tree().create_timer(0.1).timeout
+		health_changed = false

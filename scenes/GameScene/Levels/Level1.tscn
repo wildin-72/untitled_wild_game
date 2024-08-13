@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://beyxx4oivhv11" path="res://assets/images/maps/test map.jpg" id="1_85y3a"]
 [ext_resource type="PackedScene" uid="uid://csfw25lac81x1" path="res://entities/Player/player.tscn" id="1_sfwoj"]
-[ext_resource type="PackedScene" uid="uid://cjbftd2fi2yxu" path="res://entities/Cultist/cultist_basic.tscn" id="2_a5plb"]
+[ext_resource type="PackedScene" uid="uid://cjbftd2fi2yxu" path="res://entities/Cultist/Basic/cultist_basic.tscn" id="2_a5plb"]
 [ext_resource type="Script" path="res://scenes/GameScene/Levels/EnemyHolder.gd" id="3_fi3mq"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kqx8h"]

@@ -38,6 +38,7 @@ func _on_area_entered(area: Area2D) -> void:
 			var damage = hitbox.damage
 			#Apply damage to the health value stored in the export variable
 			if damage > 0:
+				print(hitbox.owner)
 				received_damage.emit(hitbox.damage, hitbox.owner)
 	if invulnerability_timer:
 		invulnerability_timer.run()
