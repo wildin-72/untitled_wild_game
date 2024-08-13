@@ -1,27 +1,59 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddpk0huy16ddb"]
+[gd_scene load_steps=6 format=3 uid="uid://csu5r8hnwt2jw"]
 
-[ext_resource type="Script" path="res://scenes/GameScene/Levels/Level1.gd" id="1_duhb4"]
-[ext_resource type="PackedScene" uid="uid://cjbftd2fi2yxu" path="res://entities/Cultist/cultist_basic.tscn" id="2_ynpk8"]
-[ext_resource type="PackedScene" uid="uid://csfw25lac81x1" path="res://entities/Player/player.tscn" id="3_o666c"]
+[ext_resource type="Texture2D" uid="uid://beyxx4oivhv11" path="res://assets/images/maps/test map.jpg" id="1_85y3a"]
+[ext_resource type="PackedScene" uid="uid://csfw25lac81x1" path="res://entities/Player/player.tscn" id="1_sfwoj"]
+[ext_resource type="PackedScene" uid="uid://cjbftd2fi2yxu" path="res://entities/Cultist/cultist_basic.tscn" id="2_a5plb"]
+[ext_resource type="Script" path="res://scenes/GameScene/Levels/EnemyHolder.gd" id="3_fi3mq"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_pyoun"]
-vertices = PackedVector2Array(1245, 286, 1253, 684, 19, 683, 35, 282)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_kqx8h"]
+vertices = PackedVector2Array(1273, 337, -1265, 339, -1267, 151, 1262, 145)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(26, 272, 1255, 277, 1264, 695, 9, 693)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1278, 142, 1288, 133, 1284, 347, -1275, 350)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[node name="Level1" type="Node"]
-script = ExtResource("1_duhb4")
-cultist_scene = ExtResource("2_ynpk8")
+[node name="World" type="Node2D"]
+y_sort_enabled = true
 
-[node name="CultistPosition" type="Marker2D" parent="."]
-position = Vector2(1142, 363)
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
 
-[node name="PlayerSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(196, 351)
+[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(640, 0)
+texture = ExtResource("1_85y3a")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-640, 0)
+texture = ExtResource("1_85y3a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-1283, -361, -1280, 144, 1283, 142, 1283, -356)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-1304, 385, 1296, 382, 1306, 136, 1277, 142, 1283, 360, -1278, 360, -1282, 145, -1316, 155)
+
+[node name="Player" parent="." instance=ExtResource("1_sfwoj")]
+y_sort_enabled = true
+position = Vector2(-104, 162)
+metadata/_edit_group_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_left = -1280
+limit_top = -360
+limit_right = 1180
+limit_bottom = 360
+
+[node name="EnemySpawn" type="Marker2D" parent="."]
+position = Vector2(1238, 170)
+
+[node name="EnemySpawn2" type="Marker2D" parent="."]
+position = Vector2(1243, 317)
+
+[node name="EnemyHolder" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("3_fi3mq")
+
+[node name="CultistBasic" parent="EnemyHolder" instance=ExtResource("2_a5plb")]
+position = Vector2(227.932, 166.749)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_pyoun")
-
-[node name="Player" parent="." instance=ExtResource("3_o666c")]
-position = Vector2(192, 478)
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_kqx8h")
