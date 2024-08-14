@@ -10,6 +10,10 @@ signal flipped
 signal unflipped
 
 func enter():
+	#Fetch animation and default animation position (for hitbox)
+	var animation = animator.get_animation("walk")
+	#Check whether the actor is wereduck (the CharacterBody2D), if so, change animation texture
+	check_wereduck(animation)
 	animator.play("walk")
 
 
@@ -38,9 +42,6 @@ func physics_update(delta):
 	if actor.health_changed:
 		transition.emit(self, "PlayerHurtState")
 
-
-
-
 func _unhandled_input(event):
 	if event.is_action_pressed("attack1"):
 		transition.emit(self, "PlayerAttack1State")
@@ -48,3 +49,9 @@ func _unhandled_input(event):
 		transition.emit(self, "PlayerAttack2State")
 	if event.is_action_pressed("attack3"):
 		transition.emit(self, "PlayerAttack3State")
+	if event.is_action_pressed("transform"):
+		transition.emit(self, "PlayerTransformState")
+
+func check_wereduck(animation):
+	if actor.is_wereduck == true:
+		animation.track_set_key_value(0, 0, load("res://assets/images/Player/Wereduck_WALK_extended.png"))
