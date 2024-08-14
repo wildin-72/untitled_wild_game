@@ -7,10 +7,12 @@ const JUMP_VELOCITY = -400.0
 @onready var sprite = $Icon
 @onready var hitbox = $Hitbox/CollisionShape2D
 
+@export var is_wereduck = false
 @export var flipped: bool = false
 @export var health: Health
 var health_changed = false
 var dead = false
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 
 
@@ -36,3 +38,7 @@ func _on_hurtbox_received_damage(damage, entity_who_hit):
 			entity_who_hit.queue_free()
 		await get_tree().create_timer(0.1).timeout
 		health_changed = false
+
+
+func _on_player_transform_state_transformed():
+	is_wereduck = true
