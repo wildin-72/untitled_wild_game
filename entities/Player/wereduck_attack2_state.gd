@@ -1,18 +1,18 @@
 extends State
 
-@export var animator: AnimationPlayer
 @export var actor: CharacterBody2D
-
+@export var animator: AnimationPlayer
 
 var combo: bool = false
 
+
 func enter():
 	#Fetch animation and default animation position (for hitbox)
-	var animation = animator.get_animation("attack2")
+	var animation = animator.get_animation("wereduckattack2")
 	var animation_position = animation.track_get_key_value(0,0)
 	#Check whether the actor is flipped (the CharacterBody2D), if so, negate the animation position
 	check_flip(animation, animation_position)
-	animator.play("attack2")
+	animator.play("wereduckattack2")
 	await animator.animation_finished
 	#Reset animation position
 	reset_animation(animation, animation_position)
@@ -25,8 +25,9 @@ func _unhandled_input(event):
 		combo = true
 		await animator.animation_finished
 		combo = false
-		transition.emit(self, "PlayerAttack3State")
+		transition.emit(self, "WereduckAttack3State")
 		get_viewport().set_input_as_handled()
+
 
 func reset_animation(animation, position):
 	animation.track_set_key_value(0, 0, position)

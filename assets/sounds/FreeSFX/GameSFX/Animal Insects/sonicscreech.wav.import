@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dobbd7c00lycp"
+path="res://.godot/imported/sonicscreech.wav-b4790051a8bfc069050867fa737d8b82.sample"
+
+[deps]
+
+source_file="res://assets/sounds/FreeSFX/GameSFX/Animal Insects/sonicscreech.wav"
+dest_files=["res://.godot/imported/sonicscreech.wav-b4790051a8bfc069050867fa737d8b82.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

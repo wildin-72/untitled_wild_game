@@ -10,7 +10,8 @@ const JUMP_VELOCITY = -400.0
 @export var is_wereduck = false
 @export var flipped: bool = false
 @export var health: Health
-var health_changed = false
+var health_decreased = false
+var health_increased = false
 var dead = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -33,12 +34,22 @@ func _on_health_health_depleted():
 func _on_hurtbox_received_damage(damage, entity_who_hit):
 	if entity_who_hit.is_in_group("Enemy"):
 		health.health -= damage
-		health_changed = true
+		health_decreased= true
 		if entity_who_hit.is_in_group("Fireball"):
 			entity_who_hit.queue_free()
 		await get_tree().create_timer(0.1).timeout
-		health_changed = false
+		health_decreased = false
 
 
 func _on_player_transform_state_transformed():
-	is_wereduck = true
+	if is_wereduck == true:
+		is_wereduck = false
+	else:
+		is_wereduck = true
+
+
+func _on_hurtbox_received_health(value):
+	health_increased = true
+	health.health -= value
+	print(health.health)
+	health

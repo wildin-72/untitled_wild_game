@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ueshtox2y44q"]
+[gd_scene load_steps=7 format=3 uid="uid://ueshtox2y44q"]
 
 [ext_resource type="Texture2D" uid="uid://beyxx4oivhv11" path="res://assets/images/maps/test map.jpg" id="1_85y3a"]
 [ext_resource type="PackedScene" uid="uid://csfw25lac81x1" path="res://entities/Player/player.tscn" id="1_sfwoj"]
 [ext_resource type="PackedScene" uid="uid://cjbftd2fi2yxu" path="res://entities/Cultist/Basic/cultist_basic.tscn" id="2_a5plb"]
 [ext_resource type="Script" path="res://scenes/GameScene/Levels/EnemyHolder.gd" id="3_fi3mq"]
+[ext_resource type="PackedScene" uid="uid://cgt8gg4u2b5yq" path="res://entities/Pickup/health_pickup.tscn" id="5_6n3mo"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kqx8h"]
 vertices = PackedVector2Array(1273, 337, -1265, 339, -1267, 151, 1262, 145)
@@ -56,3 +57,6 @@ position = Vector2(227.932, 166.749)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_kqx8h")
+
+[node name="HealthPickup" parent="." instance=ExtResource("5_6n3mo")]
+position = Vector2(474, 178)
