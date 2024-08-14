@@ -39,19 +39,30 @@ func physics_update(delta):
 		transition.emit(self, "PlayerIdleState")
 	if actor.dead:
 		transition.emit(self, "PlayerDeadState")
-	if actor.health_changed:
+	if actor.health_decreased:
 		transition.emit(self, "PlayerHurtState")
 
 func _unhandled_input(event):
-	if event.is_action_pressed("attack1"):
-		transition.emit(self, "PlayerAttack1State")
-	if event.is_action_pressed("attack2"):
-		transition.emit(self, "PlayerAttack2State")
-	if event.is_action_pressed("attack3"):
-		transition.emit(self, "PlayerAttack3State")
 	if event.is_action_pressed("transform"):
 		transition.emit(self, "PlayerTransformState")
+	if actor.is_wereduck == false:
+		if event.is_action_pressed("attack1"):
+			transition.emit(self, "PlayerAttack1State")
+		if event.is_action_pressed("attack2"):
+			transition.emit(self, "PlayerAttack2State")
+		if event.is_action_pressed("attack3"):
+			transition.emit(self, "PlayerAttack3State")
+	else:
+		if event.is_action_pressed("attack1"):
+			transition.emit(self, "WereduckAttack1State")
+		if event.is_action_pressed("attack2"):
+			transition.emit(self, "WereduckAttack2State")
+		if event.is_action_pressed("attack3"):
+			transition.emit(self, "WereduckAttack3State")
+
 
 func check_wereduck(animation):
 	if actor.is_wereduck == true:
 		animation.track_set_key_value(0, 0, load("res://assets/images/Player/Wereduck_WALK_extended.png"))
+	if actor.is_wereduck == false:
+		animation.track_set_key_value(0, 0, load("res://assets/images/Player/Player_WALK_centered.png"))
