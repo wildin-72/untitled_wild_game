@@ -21,6 +21,8 @@ func physics_update(delta):
 		transition.emit(self, "PlayerHurtState")
 	if actor.dead:
 		transition.emit(self, "PlayerDeadState")
+	if actor.health_increased:
+		transition.emit(self, "PlayerHealState")
 
 func _unhandled_input(event):
 	if event.is_action_pressed("transform"):

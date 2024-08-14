@@ -51,5 +51,5 @@ func _on_player_transform_state_transformed():
 func _on_hurtbox_received_health(value):
 	health_increased = true
 	health.health -= value
-	print(health.health)
-	health
+	await get_tree().create_timer(0.15).timeout
+	health_increased = false

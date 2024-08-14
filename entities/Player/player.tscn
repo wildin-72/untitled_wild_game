@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://csfw25lac81x1"]
+[gd_scene load_steps=46 format=3 uid="uid://csfw25lac81x1"]
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_d4p6m"]
 [ext_resource type="Texture2D" uid="uid://bojoxhpm0kjpx" path="res://assets/images/Player/Player_WALK_centered.png" id="2_sojug"]
@@ -21,11 +21,13 @@
 [ext_resource type="Texture2D" uid="uid://ew11yqi3ipxp" path="res://assets/images/Player/Player_SCREAM_extended.png" id="10_pqpdr"]
 [ext_resource type="AudioStream" uid="uid://qm1gwk6tsbro" path="res://assets/sounds/sonicscreech.wav" id="11_bxo0f"]
 [ext_resource type="Script" path="res://entities/Player/player_transform_state.gd" id="11_x27pw"]
+[ext_resource type="AudioStream" uid="uid://cq2fmeq7r5vli" path="res://assets/sounds/FreeSFX/GameSFX/PickUp/Retro PickUp Coin 04.wav" id="12_orjd4"]
 [ext_resource type="Script" path="res://entities/Player/player_hurt_state.gd" id="14_57q41"]
 [ext_resource type="Script" path="res://entities/Player/player_dead_state.gd" id="15_cnt45"]
 [ext_resource type="Script" path="res://entities/Player/wereduck_attack1_state.gd" id="18_ifj5m"]
 [ext_resource type="Script" path="res://entities/Player/wereduck_attack2_state.gd" id="20_vi0vc"]
 [ext_resource type="Script" path="res://entities/Player/wereduck_attack3_state.gd" id="24_n8pdo"]
+[ext_resource type="Script" path="res://entities/Player/player_heal_state.gd" id="27_2npaf"]
 
 [sub_resource type="Animation" id="Animation_3jn3w"]
 length = 0.001
@@ -1270,6 +1272,83 @@ tracks/10/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Icon:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.2, 1.2), Vector2(1.23, 1.23), Vector2(1.2, 1.2), Vector2(1.23, 1.23), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="Animation" id="Animation_j2j47"]
+resource_name = "heal"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 1, 0, 1), Color(1, 1, 1, 1), Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("12_orjd4")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-6.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:pitch_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.83]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_olu7p"]
 _data = {
@@ -1278,6 +1357,7 @@ _data = {
 "attack2": SubResource("Animation_im36q"),
 "attack3": SubResource("Animation_afccx"),
 "die": SubResource("Animation_ekfdr"),
+"heal": SubResource("Animation_j2j47"),
 "hurt": SubResource("Animation_wefgs"),
 "idle": SubResource("Animation_78f81"),
 "transform": SubResource("Animation_omyth"),
@@ -1402,6 +1482,10 @@ actor = NodePath("../..")
 
 [node name="PlayerHurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
 script = ExtResource("14_57q41")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerHealState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
+script = ExtResource("27_2npaf")
 animator = NodePath("../../AnimationPlayer")
 
 [node name="PlayerDeadState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
