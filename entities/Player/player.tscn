@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://csfw25lac81x1"]
+[gd_scene load_steps=46 format=3 uid="uid://csfw25lac81x1"]
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_d4p6m"]
 [ext_resource type="Texture2D" uid="uid://bojoxhpm0kjpx" path="res://assets/images/Player/Player_WALK_centered.png" id="2_sojug"]
@@ -15,11 +15,19 @@
 [ext_resource type="Script" path="res://entities/Player/player_attack1_state.gd" id="8_71a5d"]
 [ext_resource type="Texture2D" uid="uid://bvw3tfvjn1ooc" path="res://assets/images/Player/Wereduck_IDLE.png" id="8_ew5ue"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="9_upm0s"]
+[ext_resource type="Texture2D" uid="uid://biy5lmw0ql2wx" path="res://assets/images/Player/wereduck_SLASHES_joined.png" id="9_wmuv8"]
 [ext_resource type="Script" path="res://entities/Player/player_attack2_state.gd" id="9_ylbjf"]
 [ext_resource type="Script" path="res://entities/Player/player_attack3_state.gd" id="10_310bg"]
+[ext_resource type="Texture2D" uid="uid://ew11yqi3ipxp" path="res://assets/images/Player/Player_SCREAM_extended.png" id="10_pqpdr"]
+[ext_resource type="AudioStream" uid="uid://qm1gwk6tsbro" path="res://assets/sounds/sonicscreech.wav" id="11_bxo0f"]
 [ext_resource type="Script" path="res://entities/Player/player_transform_state.gd" id="11_x27pw"]
+[ext_resource type="AudioStream" uid="uid://cq2fmeq7r5vli" path="res://assets/sounds/FreeSFX/GameSFX/PickUp/Retro PickUp Coin 04.wav" id="12_orjd4"]
 [ext_resource type="Script" path="res://entities/Player/player_hurt_state.gd" id="14_57q41"]
 [ext_resource type="Script" path="res://entities/Player/player_dead_state.gd" id="15_cnt45"]
+[ext_resource type="Script" path="res://entities/Player/wereduck_attack1_state.gd" id="18_ifj5m"]
+[ext_resource type="Script" path="res://entities/Player/wereduck_attack2_state.gd" id="20_vi0vc"]
+[ext_resource type="Script" path="res://entities/Player/wereduck_attack3_state.gd" id="24_n8pdo"]
+[ext_resource type="Script" path="res://entities/Player/player_heal_state.gd" id="27_2npaf"]
 
 [sub_resource type="Animation" id="Animation_3jn3w"]
 length = 0.001
@@ -950,6 +958,398 @@ tracks/8/keys = {
 "values": [-8.0]
 }
 
+[sub_resource type="Animation" id="Animation_k1gq0"]
+resource_name = "wereduckattack1"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(88, -109)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icon:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Icon:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("8_ew5ue"), ExtResource("9_wmuv8")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.05, 0.1, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/CollisionShape2D:shape:radius")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [41.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hitbox/CollisionShape2D:shape:height")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [146.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hitbox/CollisionShape2D:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_q7kv2"]
+resource_name = "wereduckattack2"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(88, -109)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icon:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("8_ew5ue"), ExtResource("9_wmuv8")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Icon:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 2, 3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:shape:radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [47.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/CollisionShape2D:shape:height")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [174.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hitbox/CollisionShape2D:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xdno1"]
+resource_name = "wereduckattack3"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -146)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icon:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("8_ew5ue"), ExtResource("10_pqpdr")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Icon:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 0, 1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:shape:radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [179.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/CollisionShape2D:shape:height")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [370.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hitbox/CollisionShape2D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer:stream")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_bxo0f")]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-15.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("AudioStreamPlayer:pitch_scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("AudioStreamPlayer:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Icon:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.2, 1.2), Vector2(1.23, 1.23), Vector2(1.2, 1.2), Vector2(1.23, 1.23), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="Animation" id="Animation_j2j47"]
+resource_name = "heal"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 1, 0, 1), Color(1, 1, 1, 1), Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("12_orjd4")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-6.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:pitch_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.83]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_olu7p"]
 _data = {
 "RESET": SubResource("Animation_3jn3w"),
@@ -957,10 +1357,14 @@ _data = {
 "attack2": SubResource("Animation_im36q"),
 "attack3": SubResource("Animation_afccx"),
 "die": SubResource("Animation_ekfdr"),
+"heal": SubResource("Animation_j2j47"),
 "hurt": SubResource("Animation_wefgs"),
 "idle": SubResource("Animation_78f81"),
 "transform": SubResource("Animation_omyth"),
-"walk": SubResource("Animation_akdc2")
+"walk": SubResource("Animation_akdc2"),
+"wereduckattack1": SubResource("Animation_k1gq0"),
+"wereduckattack2": SubResource("Animation_q7kv2"),
+"wereduckattack3": SubResource("Animation_xdno1")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xp6np"]
@@ -1008,7 +1412,7 @@ shape = SubResource("CapsuleShape2D_xp6np")
 disabled = true
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 0
+collision_layer = 4
 script = ExtResource("4_x8v33")
 health = NodePath("../Health")
 
@@ -1018,6 +1422,7 @@ shape = SubResource("CapsuleShape2D_se0lq")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_62q20")
+max_health = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -1050,18 +1455,37 @@ script = ExtResource("8_71a5d")
 actor = NodePath("../..")
 animator = NodePath("../../AnimationPlayer")
 
+[node name="WereduckAttack1State" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("18_ifj5m")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
 [node name="PlayerAttack2State" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "actor")]
 script = ExtResource("9_ylbjf")
 animator = NodePath("../../AnimationPlayer")
 actor = NodePath("../..")
+
+[node name="WereduckAttack2State" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("20_vi0vc")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
 
 [node name="PlayerAttack3State" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "actor")]
 script = ExtResource("10_310bg")
 animator = NodePath("../../AnimationPlayer")
 actor = NodePath("../..")
 
+[node name="WereduckAttack3State" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "actor")]
+script = ExtResource("24_n8pdo")
+animator = NodePath("../../AnimationPlayer")
+actor = NodePath("../..")
+
 [node name="PlayerHurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
 script = ExtResource("14_57q41")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerHealState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
+script = ExtResource("27_2npaf")
 animator = NodePath("../../AnimationPlayer")
 
 [node name="PlayerDeadState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
@@ -1070,6 +1494,7 @@ actor = NodePath("../..")
 animator = NodePath("../../AnimationPlayer")
 
 [connection signal="received_damage" from="Hurtbox" to="." method="_on_hurtbox_received_damage"]
+[connection signal="received_health" from="Hurtbox" to="." method="_on_hurtbox_received_health"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="flipped" from="StateMachine/PlayerMoveState" to="." method="_on_player_move_state_flipped"]
 [connection signal="unflipped" from="StateMachine/PlayerMoveState" to="." method="_on_player_move_state_unflipped"]

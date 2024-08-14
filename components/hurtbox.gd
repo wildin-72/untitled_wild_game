@@ -6,6 +6,7 @@ extends Area2D
 #send hitbox owner to signal to check within own script
 #note: the signal is not connected to any function by default
 signal received_damage(damage: int, owner: CharacterBody2D)
+signal received_health(health: int)
 
 #Plug in health object in the inspector, 
 #damage will be subtracted from the values stored in this object
@@ -40,6 +41,8 @@ func _on_area_entered(area: Area2D) -> void:
 			if damage > 0:
 				print(hitbox.owner)
 				received_damage.emit(hitbox.damage, hitbox.owner)
+			else:
+				received_health.emit(hitbox.damage)
 	if invulnerability_timer:
 		invulnerability_timer.run()
 

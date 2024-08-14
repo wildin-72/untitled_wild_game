@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgt8gg4u2b5yq"]
+
+[ext_resource type="Script" path="res://entities/Pickup/health_pickup.gd" id="1_5nih5"]
+[ext_resource type="Texture2D" uid="uid://ctpq0wqq86qs6" path="res://icon.png" id="1_u46o3"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="2_phelo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b1f7e"]
+radius = 35.0143
+
+[node name="HealthPickup" type="Node2D" groups=["Pickup"]]
+script = ExtResource("1_5nih5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u46o3")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 4
+script = ExtResource("2_phelo")
+damage = -2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_b1f7e")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
