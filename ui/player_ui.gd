@@ -4,14 +4,13 @@ extends Control
 @onready var health_bar = $Control/HealthBar
 @onready var sanity_bar = $Control/SanityBar
 
-func ready():
-	global_position = Vector2(0,0)
+
+func _ready():
+	sanity_bar.frame = 10
 
 
-
-func _on_hurtbox_received_damage(damage, owner):
-	health_bar.frame = actor.health.max_health - actor.health.health
-
-
-func _on_hurtbox_received_health(health):
-	health_bar.frame = actor.health.max_health - actor.health.health
+func update(max_value: int, value: int, element: String):
+	if element == "health":
+		health_bar.frame = max_value - value
+	if element == "rage":
+		sanity_bar.frame = max_value - value

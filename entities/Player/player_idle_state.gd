@@ -7,6 +7,7 @@ extends State
 var input_vector: Vector2
 
 func enter():
+	
 	#Fetch animation and default animation position (for hitbox)
 	var animation = animator.get_animation("idle")
 	#Check whether the actor is wereduck (the CharacterBody2D), if so, change animation texture
@@ -23,6 +24,8 @@ func physics_update(delta):
 		transition.emit(self, "PlayerDeadState")
 	if actor.health_increased:
 		transition.emit(self, "PlayerHealState")
+	if actor.rage.rage == 0 and actor.is_wereduck:
+		transition.emit(self, "PlayerTransformState")
 
 func _unhandled_input(event):
 	if event.is_action_pressed("transform"):

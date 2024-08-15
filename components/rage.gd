@@ -9,7 +9,7 @@ signal rage_depleted
 @export var max_rage: int = 10 : set = set_max_rage, get = get_max_rage
 
 
-@onready var rage: int = max_rage : set = set_rage, get = get_rage
+@onready var rage: int = 0 : set = set_rage, get = get_rage
 
 
 func set_max_rage(value: int):
@@ -42,3 +42,4 @@ func set_rage(value: int):
 
 func get_rage():
 	return rage
+

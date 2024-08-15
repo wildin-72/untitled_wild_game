@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqa6dufsfysbb"
-path="res://.godot/imported/Mastermind_IDLE.png-9dacaf3f8ba60c01b507b6711b3589ff.ctex"
+uid="uid://d2p3i0ug22481"
+path="res://.godot/imported/Mastermind_SLASH.png-228eb15021f1730fea2529482d4b4256.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/Enemies/Corruptedgoon/Mastermind_IDLE.png"
-dest_files=["res://.godot/imported/Mastermind_IDLE.png-9dacaf3f8ba60c01b507b6711b3589ff.ctex"]
+source_file="res://assets/images/Enemies/Corruptedgoon/Mastermind_SLASH.png"
+dest_files=["res://.godot/imported/Mastermind_SLASH.png-228eb15021f1730fea2529482d4b4256.ctex"]
 
 [params]
 

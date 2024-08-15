@@ -1379,9 +1379,13 @@ height = 212.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t5e8"]
 height = 48.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health", "rage") groups=["Player"]]
 script = ExtResource("1_d4p6m")
 health = NodePath("Health")
+rage = NodePath("Rage")
+
+[node name="RageTimer" type="Timer" parent="."]
+wait_time = 2.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1409,7 +1413,7 @@ libraries = {
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 0
+collision_mask = 2
 script = ExtResource("9_upm0s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
@@ -1503,11 +1507,15 @@ script = ExtResource("15_cnt45")
 actor = NodePath("../..")
 animator = NodePath("../../AnimationPlayer")
 
+[connection signal="timeout" from="RageTimer" to="." method="_on_rage_timer_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="received_damage" from="Hurtbox" to="." method="_on_hurtbox_received_damage"]
 [connection signal="received_damage" from="Hurtbox" to="CanvasLayer/PlayerUi" method="_on_hurtbox_received_damage"]
 [connection signal="received_health" from="Hurtbox" to="." method="_on_hurtbox_received_health"]
 [connection signal="received_health" from="Hurtbox" to="CanvasLayer/PlayerUi" method="_on_hurtbox_received_health"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
+[connection signal="rage_changed" from="Rage" to="CanvasLayer/PlayerUi" method="_on_rage_rage_changed"]
+[connection signal="rage_depleted" from="Rage" to="." method="_on_rage_rage_depleted"]
 [connection signal="flipped" from="StateMachine/PlayerMoveState" to="." method="_on_player_move_state_flipped"]
 [connection signal="unflipped" from="StateMachine/PlayerMoveState" to="." method="_on_player_move_state_unflipped"]
 [connection signal="transformed" from="StateMachine/PlayerTransformState" to="." method="_on_player_transform_state_transformed"]
