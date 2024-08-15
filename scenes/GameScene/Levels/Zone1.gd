@@ -17,8 +17,10 @@ func _ready():
 		barrier.disabled = true
 	zone_active = false
 
-func _on_body_entered(body): #zone activates once player steps inside
-	zone_active = true
+func _on_body_entered(body):
+	if body == $"../Player":
+		print("test") #zone activates once player steps inside
+		zone_active = true
 	
 func next_wave():
 	if num_enemies == 0: #goes to next wave
@@ -61,7 +63,8 @@ func spawn_enemies(type, mob_spawn_rounds, mob_wait_time):
 				
 
 func _on_body_exited(body):
-	$ZoneBarrier/CollisionShape2D2.set_deferred("disabled", false)
+	if body == $"../Player":
+		$ZoneBarrier/CollisionShape2D2.set_deferred("disabled", false)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	

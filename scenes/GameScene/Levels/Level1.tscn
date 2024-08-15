@@ -32,7 +32,6 @@ y_sort_enabled = true
 [node name="Player" parent="." instance=ExtResource("1_sfwoj")]
 y_sort_enabled = true
 position = Vector2(248, 252)
-collision_layer = 5
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -44,15 +43,15 @@ position_smoothing_enabled = true
 editor_draw_limits = true
 
 [node name="CultistBasic" parent="." instance=ExtResource("2_a5plb")]
-position = Vector2(731, 166)
+position = Vector2(504, 192)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(1343, -3)
 navigation_polygon = SubResource("NavigationPolygon_kqx8h")
 
 [node name="Zone1" type="Area2D" parent="."]
+y_sort_enabled = true
 position = Vector2(1554, 3)
-collision_mask = 4
 script = ExtResource("3_ehmxi")
 
 [node name="ZoneArea" type="CollisionShape2D" parent="Zone1"]
@@ -82,6 +81,7 @@ y_sort_enabled = true
 position = Vector2(-1554, -3)
 
 [node name="CultistBasic" parent="Zone1/EnemyHolder" instance=ExtResource("2_a5plb")]
+y_sort_enabled = true
 position = Vector2(1704, 144)
 
 [node name="ZoneBarrier" type="StaticBody2D" parent="Zone1"]
@@ -133,7 +133,7 @@ debug_color = Color(0.92899, 3.05149e-05, 0.6625, 0.42)
 polygon = PackedVector2Array(0, 144, -1, 360, 5120, 360, 5120, 144, 5171, 163, 5171, 401, -53, 392, -47, 141)
 
 [node name="HealthPickup" parent="." instance=ExtResource("5_6n3mo")]
-position = Vector2(2232, 184)
+position = Vector2(2233, 240)
 
 [connection signal="body_entered" from="Zone1" to="Zone1" method="_on_body_entered"]
 [connection signal="body_exited" from="Zone1" to="Zone1" method="_on_body_exited"]
