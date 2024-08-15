@@ -18,8 +18,10 @@ func enter():
 
 func actor_setup():
 	await get_tree().physics_frame
-	
-	set_movement_target(Vector2(player.position.x + cultist.distance_from_player_x, player.position.y))
+	if not player:
+		return
+	var player_pos = player.get_node("Hurtbox").global_position
+	set_movement_target(Vector2(player_pos.x + cultist.distance_from_player_x, player_pos.y))
 
 func set_movement_target(movement_target: Vector2):
 	navigation_agent.target_position = movement_target
@@ -42,26 +44,26 @@ func change_to_charge():
 	return
 
 func physics_update(_delta):
+	if not player:
+		return
 	check_if_velocity_zero()
 	if navigation_agent.is_navigation_finished():
 		change_to_charge()
-	
-	# TODO Set movement target less often 
-	# this could cause performance issues later
-	
+	var player_pos = player.get_node("Hurtbox").global_position
+	var player_target = cultist.distance_from_player_x
 	
 	# Check if player X compared to cultist is negative or positive
 	# Change flipped state based on this
-	if player.position.x > cultist.position.x:
+	if player_pos.x > cultist.position.x:
 		sprite.flip_h = true
 		emit_signal("flipped")
-		set_movement_target(Vector2(player.position.x - cultist.distance_from_player_x, player.position.y))
+		set_movement_target(Vector2(player_pos.x - player_target, player_pos.y))
 	else:
 		sprite.flip_h = false
 		emit_signal("unflipped")
-		set_movement_target(Vector2(player.position.x + cultist.distance_from_player_x, player.position.y))
+		set_movement_target(Vector2(player_pos.x + player_target, player_pos.y))
 	
-	if is_close_to_player():
+	if is_close_to_player(player_pos):
 		change_to_charge()
 	var current_cultist_position: Vector2 = cultist.global_position
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
@@ -70,14 +72,13 @@ func physics_update(_delta):
 
 	cultist.move_and_slide()
 
-func is_close_to_player() -> bool:
-	var player_pos = player.position
+func is_close_to_player(player_pos: Vector2) -> bool:
 	var cultist_pos = cultist.position
 	var distance_y = cultist.distance_from_player_y
 	var distance_x = cultist.distance_from_player_x
 	if abs(player.position.y - cultist_pos.y) <= distance_y:
-		if !cultist.flipped and player_pos.x < cultist_pos.x and abs(player_pos.x - cultist_pos.x) <= distance_x:
+		if !cultist.flipped and player_pos.x <= cultist_pos.x and abs(player_pos.x - cultist_pos.x) <= distance_x:
 			return true
-		elif cultist.flipped and player_pos.x > cultist_pos.x and abs(player_pos.x - cultist_pos.x) <= distance_x:
+		elif cultist.flipped and player_pos.x >= cultist_pos.x and abs(player_pos.x - cultist_pos.x) <= distance_x:
 			return true
 	return false

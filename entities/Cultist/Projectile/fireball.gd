@@ -7,7 +7,7 @@ var speed : float = 10.0
 
 func _ready():
 	add_to_group("Fireball")
-	var player_pos = player.global_position
+	var player_pos = player.get_node("Hurtbox").global_position
 	var fireball_pos = self.global_position
 	direction = (player_pos - fireball_pos).normalized()
 

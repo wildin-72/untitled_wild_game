@@ -11,6 +11,10 @@ func punch():
 	cultist.velocity = Vector2(0, 0)
 	hitbox.disabled = false
 	animator.play("punch")
+	if cultist.flipped == true:
+		hitbox.position.x = abs(hitbox.position.x)
+	else:
+		hitbox.position.x = -abs(hitbox.position.x)
 	await get_tree().create_timer(0.75).timeout
 	print("Punch done")
 	hitbox.disabled = true
