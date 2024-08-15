@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ueshtox2y44q"]
+[gd_scene load_steps=11 format=3 uid="uid://ueshtox2y44q"]
 
 [ext_resource type="Texture2D" uid="uid://beyxx4oivhv11" path="res://assets/images/maps/test map.jpg" id="1_85y3a"]
 [ext_resource type="PackedScene" uid="uid://csfw25lac81x1" path="res://entities/Player/player.tscn" id="1_sfwoj"]
 [ext_resource type="PackedScene" uid="uid://cjbftd2fi2yxu" path="res://entities/Cultist/Basic/cultist_basic.tscn" id="2_a5plb"]
 [ext_resource type="Script" path="res://scenes/GameScene/Levels/Zone1.gd" id="3_ehmxi"]
+[ext_resource type="PackedScene" uid="uid://cgt8gg4u2b5yq" path="res://entities/Pickup/health_pickup.tscn" id="5_6n3mo"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kqx8h"]
 vertices = PackedVector2Array(-61, 345, -1322, 347, -1323, 163, -63, 159)
@@ -130,6 +131,9 @@ debug_color = Color(0.92899, 3.05149e-05, 0.6625, 0.42)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background"]
 polygon = PackedVector2Array(0, 144, -1, 360, 5120, 360, 5120, 144, 5171, 163, 5171, 401, -53, 392, -47, 141)
+
+[node name="HealthPickup" parent="." instance=ExtResource("5_6n3mo")]
+position = Vector2(2232, 184)
 
 [connection signal="body_entered" from="Zone1" to="Zone1" method="_on_body_entered"]
 [connection signal="body_exited" from="Zone1" to="Zone1" method="_on_body_exited"]

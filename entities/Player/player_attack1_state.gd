@@ -17,7 +17,7 @@ func enter():
 	#Reset animation position
 	reset_animation(animation, animation_position)
 	if combo == false:
-		transition.emit(self, "PlayerMoveState")
+		transition.emit(self, "PlayerIdleState")
 
 
 func _unhandled_input(event):
