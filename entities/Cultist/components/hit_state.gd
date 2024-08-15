@@ -1,14 +1,16 @@
 extends State
 
 @export var cultist : CharacterBody2D
+@export var animator : AnimationPlayer
 @onready var player = get_tree().get_nodes_in_group("Player")[0]
 
 func enter():
 	cultist.velocity = Vector2(0,0)
 	knockback()
+	animator.play("hurt")
 	# Not sure why, but this is needed
 	# Or else I can't transition for some reason lol
-	await get_tree().create_timer(0.75).timeout
+	await get_tree().create_timer(0.1).timeout
 	transition.emit(self, "Move")
 
 func knockback():

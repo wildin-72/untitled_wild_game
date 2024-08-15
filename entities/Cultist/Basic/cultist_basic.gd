@@ -36,5 +36,4 @@ func _on_hurtbox_received_damage(damage, entity_who_hit):
 func _on_health_health_depleted():
 	state_machine.on_state_transition(state_machine.current_state, "Death")
 
-func _on_charge_attack():
-	state_machine.on_state_transition(state_machine.current_state, "Punch")
+

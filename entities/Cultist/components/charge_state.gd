@@ -11,5 +11,5 @@ func enter():
 
 func charge():
 	animator.play("charge")
-	await get_tree().create_timer(1).timeout
-	emit_signal("attack")
+	await animator.animation_finished
+	transition.emit(self, "Punch")

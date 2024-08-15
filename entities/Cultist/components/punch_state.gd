@@ -15,9 +15,8 @@ func punch():
 		hitbox.position.x = abs(hitbox.position.x)
 	else:
 		hitbox.position.x = -abs(hitbox.position.x)
-	await get_tree().create_timer(0.75).timeout
+	await animator.animation_finished
 	print("Punch done")
 	hitbox.disabled = true
-	animator.stop()
 	transition.emit(self, "Move")
 	
