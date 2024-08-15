@@ -1,5 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://ueshtox2y44q"]
 
+[ext_resource type="Script" path="res://scenes/GameScene/Levels/Level1/Level1.gd" id="1_0rqg3"]
 [ext_resource type="PackedScene" uid="uid://csfw25lac81x1" path="res://entities/Player/player.tscn" id="1_c0tfg"]
 [ext_resource type="Script" path="res://scenes/GameScene/Levels/Level1/Zone1.gd" id="2_vyfeh"]
 [ext_resource type="PackedScene" uid="uid://cjbftd2fi2yxu" path="res://entities/Cultist/Basic/cultist_basic.tscn" id="3_3kggw"]
@@ -7,7 +8,6 @@
 [ext_resource type="Script" path="res://scenes/GameScene/Levels/Level1/Zone2.gd" id="5_5h6tn"]
 [ext_resource type="Texture2D" uid="uid://beyxx4oivhv11" path="res://assets/images/maps/test map.jpg" id="5_h57js"]
 [ext_resource type="Script" path="res://scenes/GameScene/Levels/Level1/BossZone.gd" id="6_bqh7q"]
-[ext_resource type="PackedScene" uid="uid://cpcji6oappu2d" path="res://scenes/Menus/PauseMenu/PauseMenu.tscn" id="8_yvxgd"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cjsip"]
 vertices = PackedVector2Array(846, 86, 91, 86, 105, -70, 846, -85)
@@ -44,11 +44,11 @@ size = Vector2(5118, 502)
 
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_0rqg3")
 
 [node name="Player" parent="." instance=ExtResource("1_c0tfg")]
 y_sort_enabled = true
-position = Vector2(3856, 264)
-metadata/_edit_group_ = true
+position = Vector2(232, 280)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 0
@@ -195,9 +195,6 @@ debug_color = Color(0.92899, 3.05149e-05, 0.6625, 0.42)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background"]
 polygon = PackedVector2Array(0, 144, -1, 360, 5120, 360, 5120, 144, 5171, 163, 5171, 401, -53, 392, -47, 141)
-
-[node name="PauseMenu" parent="." instance=ExtResource("8_yvxgd")]
-visible = false
 
 [connection signal="body_entered" from="Zone1" to="Zone1" method="_on_body_entered"]
 [connection signal="body_exited" from="Zone1" to="Zone1" method="_on_body_exited"]
