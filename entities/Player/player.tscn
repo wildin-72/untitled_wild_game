@@ -1,7 +1,8 @@
-[gd_scene load_steps=46 format=3 uid="uid://csfw25lac81x1"]
+[gd_scene load_steps=48 format=3 uid="uid://csfw25lac81x1"]
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_d4p6m"]
 [ext_resource type="Texture2D" uid="uid://bojoxhpm0kjpx" path="res://assets/images/Player/Player_WALK_centered.png" id="2_sojug"]
+[ext_resource type="PackedScene" uid="uid://ca544b516e1xi" path="res://ui/player_ui.tscn" id="2_xlsjo"]
 [ext_resource type="AudioStream" uid="uid://dmxcmudq6otdw" path="res://assets/sounds/FreeSFX/GameSFX/FootStep/Retro FootStep Grass 01.wav" id="3_4xprs"]
 [ext_resource type="Texture2D" uid="uid://bncljq7q0gmy3" path="res://assets/images/Player/Player_ATTACKS.png" id="3_qq44m"]
 [ext_resource type="Texture2D" uid="uid://p2ad7gs07lnq" path="res://assets/images/Player/Player_IDLE_centered.png" id="3_w62ff"]
@@ -24,6 +25,7 @@
 [ext_resource type="AudioStream" uid="uid://cq2fmeq7r5vli" path="res://assets/sounds/FreeSFX/GameSFX/PickUp/Retro PickUp Coin 04.wav" id="12_orjd4"]
 [ext_resource type="Script" path="res://entities/Player/player_hurt_state.gd" id="14_57q41"]
 [ext_resource type="Script" path="res://entities/Player/player_dead_state.gd" id="15_cnt45"]
+[ext_resource type="Script" path="res://components/rage.gd" id="16_6kll4"]
 [ext_resource type="Script" path="res://entities/Player/wereduck_attack1_state.gd" id="18_ifj5m"]
 [ext_resource type="Script" path="res://entities/Player/wereduck_attack2_state.gd" id="20_vi0vc"]
 [ext_resource type="Script" path="res://entities/Player/wereduck_attack3_state.gd" id="24_n8pdo"]
@@ -611,6 +613,71 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("3_w62ff")]
+}
+
+[sub_resource type="Animation" id="Animation_j2j47"]
+resource_name = "heal"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 1, 0, 1), Color(1, 1, 1, 1), Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("12_orjd4")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-6.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:pitch_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.83]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_wefgs"]
@@ -1285,71 +1352,6 @@ tracks/11/keys = {
 "values": [Vector2(1.2, 1.2), Vector2(1.23, 1.23), Vector2(1.2, 1.2), Vector2(1.23, 1.23), Vector2(1.2, 1.2)]
 }
 
-[sub_resource type="Animation" id="Animation_j2j47"]
-resource_name = "heal"
-length = 0.15
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Icon:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(0, 1, 0, 1), Color(1, 1, 1, 1), Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer:stream")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("12_orjd4")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-6.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AudioStreamPlayer:pitch_scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.83]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AudioStreamPlayer:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_olu7p"]
 _data = {
 "RESET": SubResource("Animation_3jn3w"),
@@ -1380,6 +1382,11 @@ height = 48.0
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health") groups=["Player"]]
 script = ExtResource("1_d4p6m")
 health = NodePath("Health")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerUi" parent="CanvasLayer" node_paths=PackedStringArray("actor") instance=ExtResource("2_xlsjo")]
+actor = NodePath("../..")
 
 [node name="Icon" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)
@@ -1423,6 +1430,9 @@ shape = SubResource("CapsuleShape2D_se0lq")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_62q20")
 max_health = 10
+
+[node name="Rage" type="Node" parent="."]
+script = ExtResource("16_6kll4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -1494,8 +1504,12 @@ actor = NodePath("../..")
 animator = NodePath("../../AnimationPlayer")
 
 [connection signal="received_damage" from="Hurtbox" to="." method="_on_hurtbox_received_damage"]
+[connection signal="received_damage" from="Hurtbox" to="CanvasLayer/PlayerUi" method="_on_hurtbox_received_damage"]
 [connection signal="received_health" from="Hurtbox" to="." method="_on_hurtbox_received_health"]
+[connection signal="received_health" from="Hurtbox" to="CanvasLayer/PlayerUi" method="_on_hurtbox_received_health"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="flipped" from="StateMachine/PlayerMoveState" to="." method="_on_player_move_state_flipped"]
 [connection signal="unflipped" from="StateMachine/PlayerMoveState" to="." method="_on_player_move_state_unflipped"]
 [connection signal="transformed" from="StateMachine/PlayerTransformState" to="." method="_on_player_transform_state_transformed"]
+
+[editable path="CanvasLayer/PlayerUi"]
