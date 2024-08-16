@@ -501,7 +501,7 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dorx0"]
 radius = 28.0
-height = 114.0
+height = 113.717
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l31x5"]
 radius = 34.0
@@ -544,7 +544,7 @@ collision_mask = 0
 script = ExtResource("4_85cbw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-83, -110)
+position = Vector2(-107.837, -171.242)
 rotation = 1.5708
 scale = Vector2(1, 0.960001)
 shape = SubResource("CapsuleShape2D_dorx0")

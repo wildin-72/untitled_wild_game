@@ -8,7 +8,7 @@
 radius = 15.4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_al5xy"]
-radius = 16.0312
+radius = 9.05539
 
 [node name="Fireball" type="Area2D" groups=["Enemy", "Fireball"]]
 script = ExtResource("1_ty7ig")
@@ -25,6 +25,7 @@ texture = ExtResource("3_eyno3")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, 0)
 shape = SubResource("CircleShape2D_al5xy")
 disabled = true
 

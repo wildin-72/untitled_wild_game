@@ -68,7 +68,7 @@ position_smoothing_enabled = true
 editor_draw_limits = true
 
 [node name="CultistBasic" parent="." instance=ExtResource("3_3kggw")]
-position = Vector2(603, 251)
+position = Vector2(604, 249)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(240, 248)
