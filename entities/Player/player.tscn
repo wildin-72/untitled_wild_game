@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://csfw25lac81x1"]
+[gd_scene load_steps=50 format=3 uid="uid://csfw25lac81x1"]
 
 [ext_resource type="Script" path="res://entities/Player/player.gd" id="1_d4p6m"]
 [ext_resource type="Texture2D" uid="uid://bojoxhpm0kjpx" path="res://assets/images/Player/Player_WALK_centered.png" id="2_sojug"]
@@ -31,6 +31,12 @@
 [ext_resource type="Script" path="res://entities/Player/wereduck_attack2_state.gd" id="20_vi0vc"]
 [ext_resource type="Script" path="res://entities/Player/wereduck_attack3_state.gd" id="24_n8pdo"]
 [ext_resource type="Script" path="res://entities/Player/player_heal_state.gd" id="27_2npaf"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_gsdpn"]
+vertices = PackedVector2Array(438, -10, -374, -17, -374, -382, 438, -382)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-384, -8, -384, -392, 448, -392, 448, 0)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="Animation" id="Animation_3jn3w"]
 length = 0.001
@@ -1385,7 +1391,12 @@ script = ExtResource("1_d4p6m")
 health = NodePath("Health")
 rage = NodePath("Rage")
 
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_gsdpn")
+
 [node name="RageTimer" type="Timer" parent="."]
+wait_time = 2.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

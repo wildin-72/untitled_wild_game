@@ -61,7 +61,7 @@ func spawn_enemies(type, mob_spawn_rounds, mob_wait_time):
 		if mob_spawn_rounds >= 1:
 			for i in mob_spawn_rounds:
 				var proj = enemy_projectile.instantiate()
-				proj.position = $EnemySpawn3.position
+				proj.position = $EnemySpawn4.position
 				$EnemyHolder.add_child(proj)
 				mob_spawn_rounds -= 1
 				await get_tree().create_timer(mob_wait_time).timeout
