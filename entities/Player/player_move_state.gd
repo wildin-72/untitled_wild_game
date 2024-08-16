@@ -31,7 +31,10 @@ func physics_update(delta):
 			sprite.flip_h = false
 			emit_signal("unflipped")
 		#Set velocity
-		actor.velocity = input_vector * actor.SPEED
+		if actor.is_wereduck:
+				actor.velocity = input_vector * (actor.SPEED + 100)
+		else:
+			actor.velocity = input_vector * actor.SPEED
 	else:
 		actor.velocity = actor.velocity.move_toward(Vector2.ZERO, actor.SPEED)
 	actor.move_and_slide()
