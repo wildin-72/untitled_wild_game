@@ -31,5 +31,5 @@ func pause():
 
 func _on_complete_level_body_entered(body):
 	if lvl_complete:
-		get_tree().change_scene_to_file("res://scenes/GameScene/Levels/Level2/Level2.tscn")
+		get_tree().change_scene_to_file("res://scenes/EndCredits/EndCredits.tscn")
 	else: 	pass
