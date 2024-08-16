@@ -18,7 +18,7 @@ extends CharacterBody2D
 # distance x and y player must be under for attack to occur
 @export var distance_from_player_x : int = 160
 @export var distance_from_player_y : int = 60
-@export var movement_speed : int = 60
+@export var movement_speed : int = 40
 
 func _on_cultist_move_state_flipped():
 	flipped = true
