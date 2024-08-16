@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var pause_menu = $Player/CanvasLayer/PlayerUi/PauseMenu
+@onready var player = get_tree().get_first_node_in_group("Player")
 var paused = false
 var lvl_complete = false
 
@@ -12,6 +13,11 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("enter"):
 		pause()
+	if !player:
+		var game_over_screen = load("res://scenes/LoseScreen/LoseScreen.tscn")
+		var game_over_screen_instance = game_over_screen.instantiate()
+		add_child(game_over_screen_instance)
+		
 	
 func pause():
 	if paused:

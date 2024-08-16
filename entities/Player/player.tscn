@@ -1386,7 +1386,6 @@ health = NodePath("Health")
 rage = NodePath("Rage")
 
 [node name="RageTimer" type="Timer" parent="."]
-wait_time = 2.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
