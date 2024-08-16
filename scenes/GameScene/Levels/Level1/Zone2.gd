@@ -24,6 +24,9 @@ func next_wave():
 		if wave_num == 3:
 			zone_active = false
 			zone_complete = true
+			var proj = enemy_projectile.instantiate()
+			proj.position = $"../BossZone/EnemySpawn3".position
+			$"../BossZone/EnemyHolder".add_child(proj)
 		else:
 			prepare_spawn("basic", 2.33, 3)
 			prepare_spawn("proj", .75, 1)
