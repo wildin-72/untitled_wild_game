@@ -500,13 +500,15 @@ cultist = NodePath("../..")
 animator = NodePath("../../Sprite2D/AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 
-[node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist")]
+[node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator")]
 script = ExtResource("11_57aty")
 cultist = NodePath("../..")
+animator = NodePath("../../Sprite2D/AnimationPlayer")
 
-[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist")]
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator")]
 script = ExtResource("12_kbnfm")
 cultist = NodePath("../..")
+animator = NodePath("../../Sprite2D/AnimationPlayer")
 
 [node name="FireballSpawn" type="Marker2D" parent="."]
 position = Vector2(-82, -111)
