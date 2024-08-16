@@ -26,7 +26,7 @@ func next_wave():
 			zone_complete = true
 		else:
 			prepare_spawn("basic", 2, 2)
-			#prepare_spawn("basic", .5, 1)
+			prepare_spawn("proj", .5, 1)
 
 		
 func prepare_spawn(type, mult, mob_spawns):

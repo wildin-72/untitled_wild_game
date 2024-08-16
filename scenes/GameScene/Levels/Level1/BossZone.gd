@@ -7,6 +7,7 @@ extends Area2D
 @onready var wave_num: = 0
 @onready var zone_active = false
 @onready var zone_complete = false
+@onready var level = $".."
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,7 +32,7 @@ func next_wave():
 			zone_complete = true
 		else:
 			prepare_spawn("basic", 3, 3)
-			#prepare_spawn("basic", 1, 1) #replace w/ proj in final
+			prepare_spawn("proj", 1, 1) #replace w/ proj in final
 
 		
 func prepare_spawn(type, mult, mob_spawns):
@@ -76,6 +77,7 @@ func _process(delta):
 		
 	if zone_complete:
 		zone_active=false
+		level.lvl_complete = true
 		
 
 

@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var pause_menu = $Player/CanvasLayer/PlayerUi/PauseMenu
 var paused = false
+var lvl_complete = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,7 +22,8 @@ func pause():
 		pause_menu.show()
 		Engine.time_scale = 0
 		paused = !paused
-		
 
-	
-		
+func _on_complete_level_body_entered(body):
+	if lvl_complete:
+		get_tree().reload_current_scene()
+	else: 	pass
