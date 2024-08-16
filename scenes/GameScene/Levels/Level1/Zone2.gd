@@ -25,7 +25,7 @@ func next_wave():
 			zone_active = false
 			zone_complete = true
 		else:
-			prepare_spawn("basic", 2.5, 3)
+			prepare_spawn("basic", 2.33, 3)
 			prepare_spawn("proj", .75, 1)
 
 		
@@ -55,7 +55,7 @@ func spawn_enemies(type, mob_spawn_rounds, mob_wait_time):
 		if mob_spawn_rounds >= 1:
 			for i in mob_spawn_rounds:
 				var proj = enemy_projectile.instantiate()
-				proj.position = $EnemySpawn3.position
+				proj.position = $EnemySpawn4.position
 				$EnemyHolder.add_child(proj)
 				mob_spawn_rounds -= 1
 				await get_tree().create_timer(mob_wait_time).timeout
