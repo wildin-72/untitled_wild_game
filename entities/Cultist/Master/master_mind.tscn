@@ -168,11 +168,10 @@ scale = Vector2(1, 0.960001)
 shape = SubResource("CapsuleShape2D_dorx0")
 disabled = true
 
-[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_qwdy5")
-health = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -97)
@@ -182,9 +181,8 @@ shape = SubResource("CapsuleShape2D_l31x5")
 script = ExtResource("6_a6ngl")
 max_health = 5
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("7_sxgm4")
-initial_state = NodePath("")
 
 [node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("cultist", "animator", "sprite", "navigation_agent")]
 script = ExtResource("8_0w1np")

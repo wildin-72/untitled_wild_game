@@ -51,8 +51,8 @@ func _on_player_transform_state_transformed():
 	if is_wereduck == true:
 		is_wereduck = false
 		stop_rage_deplete()
-		health.health = stored_health
 		health.max_health = max_health 
+		health.health = stored_health
 		player_ui.update(max_health, health.health, "health")
 	elif rage.rage > 0:
 		is_wereduck = true
@@ -61,7 +61,7 @@ func _on_player_transform_state_transformed():
 			stored_health = health.health
 			health.health -= health.health/2 
 			health.max_health = health.health
-			player_ui.update(10, health.health, "health")
+			player_ui.update(max_health, health.health, "health")
 
 
 func _on_hurtbox_received_health(value):

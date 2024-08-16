@@ -54,7 +54,7 @@ func physics_update(_delta):
 	
 	# Check if player X compared to cultist is negative or positive
 	# Change flipped state based on this
-	if player_pos.x > cultist.position.x:
+	if player_pos.x > cultist.global_position.x:
 		sprite.flip_h = true
 		emit_signal("flipped")
 		set_movement_target(Vector2(player_pos.x - player_target, player_pos.y))

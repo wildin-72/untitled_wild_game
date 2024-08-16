@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://ueshtox2y44q"]
+[gd_scene load_steps=17 format=3 uid="uid://ueshtox2y44q"]
 
 [ext_resource type="Script" path="res://scenes/GameScene/Levels/Level1/Level1.gd" id="1_0rqg3"]
 [ext_resource type="PackedScene" uid="uid://csfw25lac81x1" path="res://entities/Player/player.tscn" id="1_c0tfg"]
+[ext_resource type="AudioStream" uid="uid://crge6f4guqvc7" path="res://assets/music/quackinthecity.wav" id="2_esj8x"]
 [ext_resource type="Script" path="res://scenes/GameScene/Levels/Level1/Zone1.gd" id="2_vyfeh"]
 [ext_resource type="PackedScene" uid="uid://cjbftd2fi2yxu" path="res://entities/Cultist/Basic/cultist_basic.tscn" id="3_3kggw"]
 [ext_resource type="PackedScene" uid="uid://cgt8gg4u2b5yq" path="res://entities/Pickup/health_pickup.tscn" id="4_i6gdj"]
@@ -45,6 +46,11 @@ size = Vector2(5118, 502)
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_0rqg3")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_esj8x")
+volume_db = -4.0
+autoplay = true
 
 [node name="Player" parent="." instance=ExtResource("1_c0tfg")]
 y_sort_enabled = true
