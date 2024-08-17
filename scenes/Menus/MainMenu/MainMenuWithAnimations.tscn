@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://dpel22uvxis52"]
+[gd_scene load_steps=17 format=3 uid="uid://dpel22uvxis52"]
 
 [ext_resource type="PackedScene" uid="uid://2pm27icc6qj5" path="res://scenes/Menus/MainMenu/MainMenu.tscn" id="1_dufvr"]
 [ext_resource type="Script" path="res://scenes/Menus/MainMenu/MainMenuWithAnimations.gd" id="2_2xj2y"]
+[ext_resource type="AudioStream" uid="uid://on3hf6djlvl2" path="res://assets/music/curseofthewereduck.wav" id="3_yx4yq"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "Intro"
@@ -349,18 +350,23 @@ graph_offset = Vector2(-180.277, 49)
 
 [node name="MainMenu" instance=ExtResource("1_dufvr")]
 script = ExtResource("2_2xj2y")
+show_version = false
 
-[node name="MenuAnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="0"]
+stream = ExtResource("3_yx4yq")
+autoplay = true
+
+[node name="MenuAnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 libraries = {
 "": SubResource("AnimationLibrary_2kqig")
 }
 
-[node name="MenuAnimationTree" type="AnimationTree" parent="." index="2"]
+[node name="MenuAnimationTree" type="AnimationTree" parent="." index="3"]
 tree_root = SubResource("AnimationNodeStateMachine_vikuh")
 anim_player = NodePath("../MenuAnimationPlayer")
 parameters/conditions/intro_done = false
 
-[node name="VersionNameLabel" parent="." index="5"]
+[node name="VersionNameLabel" parent="." index="6"]
 modulate = Color(1, 1, 1, 0)
 
 [node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
