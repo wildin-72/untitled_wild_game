@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ueshtox2y44q"]
+[gd_scene load_steps=15 format=3 uid="uid://ueshtox2y44q"]
 
 [ext_resource type="Script" path="res://scenes/GameScene/Levels/Level1/Level1.gd" id="1_0rqg3"]
 [ext_resource type="PackedScene" uid="uid://csfw25lac81x1" path="res://entities/Player/player.tscn" id="1_c0tfg"]
@@ -20,9 +20,6 @@ size = Vector2(979, 219)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3orr7"]
 size = Vector2(5118, 502)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_echdw"]
-size = Vector2(72, 208)
 
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
@@ -170,19 +167,9 @@ position = Vector2(5080, 240)
 color = Color(0, 0.82, 0.0273333, 1)
 polygon = PackedVector2Array(-40, -96, -40, 112, 40, 112, 40, -96)
 
-[node name="CompleteLevel" type="Area2D" parent="."]
-visible = false
-position = Vector2(5080, 240)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CompleteLevel"]
-position = Vector2(4, 8)
-shape = SubResource("RectangleShape2D_echdw")
-debug_color = Color(0, 0.646758, 0.229083, 0.42)
-
 [connection signal="body_entered" from="Zone1" to="Zone1" method="_on_body_entered"]
 [connection signal="body_exited" from="Zone1" to="Zone1" method="_on_body_exited"]
 [connection signal="body_entered" from="Zone2" to="Zone2" method="_on_body_entered"]
 [connection signal="body_exited" from="Zone2" to="Zone2" method="_on_body_exited"]
 [connection signal="body_entered" from="BossZone" to="BossZone" method="_on_body_entered"]
 [connection signal="body_exited" from="BossZone" to="BossZone" method="_on_body_exited"]
-[connection signal="body_entered" from="CompleteLevel" to="." method="_on_complete_level_body_entered"]

@@ -3,6 +3,7 @@ extends Area2D
 @onready var num_enemies = $EnemyHolder.get_child_count()
 @onready var enemy_basic = preload("res://entities/Cultist/Basic/cultist_basic.tscn")
 @onready var enemy_projectile = preload("res://entities/Cultist/Projectile/cultist_projectile.tscn")
+@onready var boss = preload("res://entities/Cultist/Master/master_mind.tscn")
 @onready var wave_num: = 0
 @onready var zone_active = false
 @onready var zone_complete = false
@@ -24,9 +25,12 @@ func next_wave():
 		if wave_num == 3:
 			zone_active = false
 			zone_complete = true
+			boss = boss.instantiate()
+			boss.position = $"../BossZone/EnemySpawn2".position
+			$"../BossZone/EnemyHolder".add_child(boss)
 		else:
-			prepare_spawn("basic", 2.33, 3)
-			prepare_spawn("proj", .75, 1)
+			prepare_spawn("basic", 3.5, 3)
+			prepare_spawn("proj", 2.5, 2)
 
 		
 func prepare_spawn(type, mult, mob_spawns):
@@ -44,7 +48,7 @@ func spawn_enemies(type, mob_spawn_rounds, mob_wait_time):
 				var basic3 = enemy_basic.instantiate()
 				basic1.position = $EnemySpawn.position
 				basic2.position = $EnemySpawn2.position
-				basic2.position = $EnemySpawn3.position
+				basic3.position = $EnemySpawn4.position
 				$EnemyHolder.add_child(basic1)
 				$EnemyHolder.add_child(basic2)
 				$EnemyHolder.add_child(basic3)
@@ -54,9 +58,12 @@ func spawn_enemies(type, mob_spawn_rounds, mob_wait_time):
 	if type == "proj":
 		if mob_spawn_rounds >= 1:
 			for i in mob_spawn_rounds:
-				var proj = enemy_projectile.instantiate()
-				proj.position = $EnemySpawn4.position
-				$EnemyHolder.add_child(proj)
+				var proj1 = enemy_projectile.instantiate()
+				var proj2 = enemy_projectile.instantiate()
+				proj1.position = $EnemySpawn3.position
+				proj2.position = $EnemySpawn5.position
+				$EnemyHolder.add_child(proj1)
+				$EnemyHolder.add_child(proj2)
 				mob_spawn_rounds -= 1
 				await get_tree().create_timer(mob_wait_time).timeout
 				

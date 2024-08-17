@@ -17,6 +17,10 @@ func _process(delta):
 		var game_over_screen = load("res://scenes/LoseScreen/LoseScreen.tscn")
 		var game_over_screen_instance = game_over_screen.instantiate()
 		add_child(game_over_screen_instance)
+	if lvl_complete:
+		var complete_menu = load("res://scenes/GameScene/Levels/Level2/WinScreen.tscn")
+		complete_menu = complete_menu.instantiate()
+		$Player/CanvasLayer/PlayerUi.add_child(complete_menu)
 		
 	
 func pause():
@@ -29,7 +33,3 @@ func pause():
 		Engine.time_scale = 0
 		paused = !paused
 
-func _on_complete_level_body_entered(body):
-	if lvl_complete:
-		get_tree().change_scene_to_file("res://scenes/EndCredits/EndCredits.tscn")
-	else: 	pass

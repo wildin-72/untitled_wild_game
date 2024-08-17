@@ -24,14 +24,21 @@ func next_wave():
 		if wave_num == 2:
 			zone_active = false
 			zone_complete = true
+			var proj1 = enemy_projectile.instantiate()
+			var proj2 = enemy_projectile.instantiate()
+			proj1.position = $"../Zone2/EnemySpawn".position
+			proj2.position = $"../Zone2/EnemySpawn4".position
+			$"../Zone2/EnemyHolder".add_child(proj1)
+			$"../Zone2/EnemyHolder".add_child(proj2)
+
 		else:
-			prepare_spawn("basic", 2, 2)
-			prepare_spawn("proj", .5, 1)
+			prepare_spawn("basic", 3, 3)
+			prepare_spawn("proj", 2, 2)
 
 		
 func prepare_spawn(type, mult, mob_spawns):
 	var mob_amount = wave_num*mult
-	var mob_wait_time = 2.0
+	var mob_wait_time = 3
 	var mob_spawn_rounds = ceil(mob_amount/mob_spawns)
 	spawn_enemies(type, mob_spawn_rounds, mob_wait_time)
 
@@ -41,19 +48,25 @@ func spawn_enemies(type, mob_spawn_rounds, mob_wait_time):
 			for i in mob_spawn_rounds:
 				var basic1 = enemy_basic.instantiate()
 				var basic2 = enemy_basic.instantiate()
+				var basic3 = enemy_basic.instantiate()
 				basic1.position = $EnemySpawn.position
 				basic2.position = $EnemySpawn2.position
+				basic3.position = $EnemySpawn4.position
 				$EnemyHolder.add_child(basic1)
 				$EnemyHolder.add_child(basic2)
+				$EnemyHolder.add_child(basic3)
 				mob_spawn_rounds -= 1
 				await get_tree().create_timer(mob_wait_time).timeout
 				
 	if type == "proj":
 		if mob_spawn_rounds >= 1:
 			for i in mob_spawn_rounds:
-				var proj = enemy_projectile.instantiate()
-				proj.position = $EnemySpawn3.position
-				$EnemyHolder.add_child(proj)
+				var proj1 = enemy_projectile.instantiate()
+				var proj2 = enemy_projectile.instantiate()
+				proj1.position = $EnemySpawn3.position
+				proj2.position = $EnemySpawn5.position
+				$EnemyHolder.add_child(proj1)
+				$EnemyHolder.add_child(proj2)
 				mob_spawn_rounds -= 1
 				await get_tree().create_timer(mob_wait_time).timeout
 				
