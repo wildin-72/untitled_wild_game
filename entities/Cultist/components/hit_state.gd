@@ -10,7 +10,7 @@ func enter():
 	animator.play("hurt")
 	# Not sure why, but this is needed
 	# Or else I can't transition for some reason lol
-	await get_tree().create_timer(0.1).timeout
+	await animator.animation_finished
 	transition.emit(self, "Move")
 
 func knockback():
