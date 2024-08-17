@@ -3,7 +3,7 @@ extends Area2D
 @onready var num_enemies = $EnemyHolder.get_child_count()
 @onready var enemy_basic = preload("res://entities/Cultist/Basic/cultist_basic.tscn")
 @onready var enemy_projectile = preload("res://entities/Cultist/Projectile/cultist_projectile.tscn")
-@onready var boss = preload("res://entities/Cultist/Basic/cultist_basic.tscn")
+@onready var boss = preload("res://entities/Cultist/Master/master_mind.tscn")
 @onready var wave_num: = 0
 @onready var zone_active = false
 @onready var zone_complete = false

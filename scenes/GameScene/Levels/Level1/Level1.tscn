@@ -140,6 +140,7 @@ position = Vector2(-24, 136)
 
 [node name="Background" type="StaticBody2D" parent="."]
 metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Background"]
 position = Vector2(2432, 0)
