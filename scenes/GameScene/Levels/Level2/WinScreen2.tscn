@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dj7vsa822ma88"]
+[gd_scene load_steps=3 format=3 uid="uid://b0s2ih00jp4r5"]
 
 [ext_resource type="Script" path="res://addons/maaacks_game_template/base/scripts/UISoundController.gd" id="2_6sry2"]
-[ext_resource type="Script" path="res://scenes/GameScene/Levels/Level1/WinScreen.gd" id="2_ml17l"]
+[ext_resource type="Script" path="res://scenes/GameScene/Levels/Level2/WinScreen2.gd" id="2_ml17l"]
 
 [node name="WinScreen" type="Control"]
 layout_mode = 3

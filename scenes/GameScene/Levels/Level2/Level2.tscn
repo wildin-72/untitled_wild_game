@@ -43,7 +43,7 @@ position_smoothing_enabled = true
 editor_draw_limits = true
 
 [node name="CultistProjectile" parent="." instance=ExtResource("9_3f54d")]
-position = Vector2(928, 264)
+position = Vector2(512, 280)
 
 [node name="Zone1" type="Area2D" parent="."]
 y_sort_enabled = true

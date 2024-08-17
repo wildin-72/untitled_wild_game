@@ -18,7 +18,7 @@ func _process(delta):
 		var game_over_screen_instance = game_over_screen.instantiate()
 		add_child(game_over_screen_instance)
 	if lvl_complete:
-		var complete_menu = load("res://scenes/GameScene/Levels/Level2/WinScreen.tscn")
+		var complete_menu = load("res://scenes/GameScene/Levels/Level2/WinScreen2.tscn")
 		complete_menu = complete_menu.instantiate()
 		$Player/CanvasLayer/PlayerUi.add_child(complete_menu)
 		
