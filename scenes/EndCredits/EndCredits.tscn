@@ -33,6 +33,37 @@ stretch_mode = 5
 [node name="ScrollContainer" parent="." index="3"]
 scroll_vertical = 0
 
+[node name="CreditsLabel" parent="ScrollContainer/VBoxContainer" index="1"]
+text = "[center][font_size=48]Credits[/font_size]
+
+[font_size=24]Character Art and Menu Design[/font_size]
+[url=https://steamcommunity.com/id/SkippyHippie]Skippy[/url]
+
+[font_size=32]Environment Art[/font_size]
+[url=https://kyle-d.itch.io/]Kyled00[/url]
+
+[font_size=24]Level Design[/font_size]
+[url=]Shimzini[/url]
+
+[font_size=24]Music[/font_size]
+[url=https://phorpho.itch.io/]Justice Cabantangan[/url]  
+
+[font_size=32]Programming[/font_size]
+[url=https://phorpho.itch.io/]Justice Cabantangan[/url]  
+[url=https://kainosaurus.itch.io/]Kain Dean[/url]
+
+[font_size=32]Assets Used[/font_size]
+[url=https://bbbbbr.itch.io/canyon-racer-fonts]Canyon Racer Pixel Font by bbbbbr[/url]
+[url=https://kronbits.itch.io/freesfx]200 Free SFX by Kronbits[/url]
+
+
+
+
+
+
+
+[/center]"
+
 [node name="CenterContainer" type="CenterContainer" parent="." index="4"]
 layout_mode = 0
 anchor_right = 1.0
