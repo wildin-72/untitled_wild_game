@@ -8,7 +8,7 @@
 [Kyled00](https://kyle-d.itch.io/)
 
 #### Level Design
-[Shimzini](https://shimzini.itch.io/)
+[Shimzini](https://www.linktr.ee/shimzini)
 
 #### Music
 [Justice Cabantangan](https://phorpho.itch.io/)  
