@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://on3hf6djlvl2" path="res://assets/music/curseofthewereduck.wav" id="3_yx4yq"]
 [ext_resource type="Script" path="res://addons/maaacks_game_template/base/scripts/UISoundController.gd" id="5_uvg75"]
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="6_c0blc"]
-[ext_resource type="Texture2D" uid="uid://60lvy8gmuyel" path="res://assets/images/Menu/CurseoftheWereduckCover-Art.png" id="7_bt62v"]
+[ext_resource type="Texture2D" uid="uid://qoha4u1iwihj" path="res://assets/images/Menu/CurseoftheWereduckCover-Art.png" id="7_bt62v"]
 [ext_resource type="Script" path="res://addons/maaacks_game_template/base/scripts/CaptureFocus.gd" id="8_xwtpg"]
 
 [sub_resource type="Animation" id="1"]
